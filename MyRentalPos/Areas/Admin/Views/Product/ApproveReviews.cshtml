@@ -1,0 +1,144 @@
+﻿@using MyRentalPos.Core.Domain.Products
+@model MyRentalPos.Areas.Admin.Models.Products.ApproveReviewModel
+
+@{
+    ViewBag.Title = "Approve Reviews";
+}
+
+<h2>Approve Reviews</h2>
+<ul class="nav nav-tabs">
+    <li class="active">
+        <a href="#pending" data-toggle="tab">Pending</a>
+    </li>
+    <li>
+        <a href="#approved" data-toggle="tab">Approved</a>
+    </li>
+    <li>
+        <a href="#denied" data-toggle="tab">Denied</a>
+    </li>
+</ul>
+
+
+<div class="tab-content">
+    <div class="tab-pane active" id="pending">
+        <table class="table table-striped">
+            <tr>
+                <th>User Name</th>
+                <th>Email Address</th>
+                <th>Location</th>
+                <th>Created Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            @foreach (var item in Model.Reviews)
+            {
+                if (item.IsApproved != EnumApproveReview.Approved.ToString() && item.IsApproved != EnumApproveReview.Denied.ToString())
+                {
+                <tr>
+                    @Html.HiddenFor(x => item.Id)
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.EmailAddress
+                    </td>
+                    <td>
+                        @item.Location
+                    </td>
+                    <td>
+                        @item.CreatedDate
+                    </td>
+                    <td>
+                        @item.IsApproved
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "ViewSingleReview",new { id = item.Id })
+                    </td>
+                </tr>
+                }
+            }
+
+        </table>
+    </div>
+    <div class="tab-pane" id="approved">
+        <table class="table table-striped">
+            <tr>
+                <th>User Name</th>
+                <th>Email Address</th>
+                <th>Location</th>
+                <th>Created Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+
+            </tr>
+            @foreach (var item in Model.Reviews)
+            {
+                if (item.IsApproved == EnumApproveReview.Approved.ToString())
+                {
+                    <tr>
+                        <td>
+                            @item.UserName
+                        </td>
+                        <td>
+                            @item.EmailAddress
+                        </td>
+                        <td>
+                            @item.Location
+                        </td>
+                        <td>
+                            @item.CreatedDate
+                        </td>
+                        <td>
+                            @item.IsApproved
+                        </td>
+                        <td>
+                            @Html.ActionLink("View", "ViewSingleReview",new { id = item.Id })
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <div class="tab-pane" id="denied">
+        <table class="table table-striped">
+            <tr>
+                <th>User Name</th>
+                <th>Email Address</th>
+                <th>Location</th>
+                <th>Created Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+
+            </tr>
+            @foreach (var item in Model.Reviews)
+            {
+                if (item.IsApproved == EnumApproveReview.Denied.ToString())
+                {
+                <tr>
+                    <td>
+                        @item.UserName
+                    </td>
+                    <td>
+                        @item.EmailAddress
+                    </td>
+                    <td>
+                        @item.Location
+                    </td>
+                    <td>
+                        @item.CreatedDate
+                    </td>
+                    <td>
+                        @item.IsApproved
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "ViewSingleReview",new { id = item.Id })
+                    </td>
+                </tr>
+                }
+            }
+        </table>
+    </div>
+</div>
+
+
+
