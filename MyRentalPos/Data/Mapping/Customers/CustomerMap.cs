@@ -9,36 +9,41 @@ namespace MyRentalPos.Data.Mapping.Customers
         public CustomerMap()
         {
             // Primary Key
-            this.HasKey(t => t.Id);
+            HasKey(t => t.Id);
 
             // Properties
-            this.Property(t => t.UserName)
+            Property(t => t.Address)
                 .HasMaxLength(128);
 
-            this.Property(t => t.Email)
+            Property(t => t.City)
+                .HasMaxLength(128);
+            
+            Property(t => t.CompanyName)
                 .HasMaxLength(128);
 
-            this.Property(t => t.FirstName)
+            Property(t => t.Email)
                 .HasMaxLength(128);
 
-            this.Property(t => t.LastName)
+            Property(t => t.FirstName)
                 .HasMaxLength(128);
 
-            this.Property(t => t.ConfirmationToken)
+            Property(t => t.LastName)
                 .HasMaxLength(128);
 
+            Property(t => t.PhoneNumber)
+                .HasMaxLength(128);
+
+            Property(t => t.State)
+                .HasMaxLength(128);
+
+            Property(t => t.StoreId);
+
+            Property(t => t.ZipCode)
+                .HasMaxLength(128);
+            
+            
             // Table & Column Mappings
-            this.ToTable("Customer");
-
-            // Relationships
-            this.HasMany(t => t.CustomerRoles)
-                .WithMany(t => t.Customers)
-                .Map(m =>
-                {
-                    m.ToTable("Customer_CustomerRole_Mapping");
-                    m.MapLeftKey("Customer_Id");
-                    m.MapRightKey("CustomerRole_Id");
-                });
+            ToTable("Customer");
         }
     }
 }

@@ -1,21 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using MyRentalPos.Core.Domain.Customers;
 using MyRentalPos.Core.Domain.Security;
 
-namespace MyRentalPos.Core.Domain.Customers
+namespace MyRentalPos.Core.Domain.Employees
 {
-    public class CustomerRole : BaseEntity
+    public class EmployeeRole : BaseEntity
     {
         private ICollection<PermissionRecord> _permissionRecords;
         private ICollection<Customer> _customers;
-
-        /// <summary>
-        /// Gets or sets the customer role name
-        /// </summary>
-
-        public CustomerRole()
-        {
-        }
-
         public string Name { get; set; }
         public bool Active { get; set; }
 

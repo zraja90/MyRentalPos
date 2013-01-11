@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using MyRentalPos.Core.Domain.Customers;
+using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Core.Domain.Security;
 
 namespace MyRentalPos.Services.Security
@@ -28,7 +29,7 @@ namespace MyRentalPos.Services.Security
                        {
                            new DefaultPermissionRecord
                                {
-                                   CustomerRoleSystemName = SystemCustomerRoleNames.Admin,
+                                   CustomerRoleSystemName = EnumEmployeeRoleNames.Admin,
                                    PermissionRecords = new[]
                                                 {
                                                     AccessAdminPanel

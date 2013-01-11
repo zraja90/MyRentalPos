@@ -5,10 +5,7 @@ using System.Web;
 
 namespace MyRentalPos.Core.Domain.Products
 {
-    public enum EnumApproveReview
+    public class Discounts : BaseEntity
     {
-        Pending,
-        Approved,
-        Denied
     }
 }

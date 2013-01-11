@@ -1,4 +1,5 @@
-﻿@using MyRentalPos.Core.Domain.Products
+﻿@using MyRentalPos.Core.Domain.Orders
+@using MyRentalPos.Core.Domain.Products
 @model MyRentalPos.Areas.Admin.Models.Products.ApproveReviewModel
 
 @{
@@ -32,7 +33,7 @@
             </tr>
             @foreach (var item in Model.Reviews)
             {
-                if (item.IsApproved != EnumApproveReview.Approved.ToString() && item.IsApproved != EnumApproveReview.Denied.ToString())
+                if (item.IsApproved != EnumOrderStatus.Approved.ToString() && item.IsApproved != EnumOrderStatus.Denied.ToString())
                 {
                 <tr>
                     @Html.HiddenFor(x => item.Id)
@@ -73,7 +74,7 @@
             </tr>
             @foreach (var item in Model.Reviews)
             {
-                if (item.IsApproved == EnumApproveReview.Approved.ToString())
+                if (item.IsApproved == EnumOrderStatus.Approved.ToString())
                 {
                     <tr>
                         <td>
@@ -112,7 +113,7 @@
             </tr>
             @foreach (var item in Model.Reviews)
             {
-                if (item.IsApproved == EnumApproveReview.Denied.ToString())
+                if (item.IsApproved == EnumOrderStatus.Denied.ToString())
                 {
                 <tr>
                     <td>

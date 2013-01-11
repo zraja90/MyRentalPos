@@ -7,43 +7,23 @@ namespace MyRentalPos.Core.Domain.Products
 {
     public class Product : BaseEntity
     {
-        public Product()
-        {
-            CreatedDate = DateTime.UtcNow;
-        }
+        public int StoreId { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
-        public bool IsFeatured { get; set; }
         public string Description { get; set; }
         public DateTime CreatedDate { get; set; }
+        public int RentalQuantity { get; set; }
+        public int SalesQuantity { get; set; }
+        public bool IsRental { get; set; }
+        public bool IsSales { get; set; }
+        public int SalesPrice { get; set; }
+        
+        private ICollection<RentalPrices> _rentalPrices;
 
-        public int CategoryId { get; set; }
-
-        public virtual ProductCategory Category { get; set; }
-
-        private ICollection<ProductSpecs> _productSpecs;
-        public virtual ICollection<ProductSpecs> ProductSpecs 
-        { get { return _productSpecs ?? (_productSpecs = new List<ProductSpecs>()); }
-            protected set { _productSpecs = value; }
-        }
-
-        private ICollection<ProductFeatures> _productFeatures;
-        public virtual ICollection<ProductFeatures> ProductFeatures
+        public virtual ICollection<RentalPrices> RentalPrices
         {
-            get { return _productFeatures ?? (_productFeatures = new List<ProductFeatures>()); }
+            get { return _rentalPrices ?? (_rentalPrices = new List<RentalPrices>()); }
+            protected set { _rentalPrices = value; }
         }
-
-        private ICollection<ProductReviews> _productReviews;
-        public virtual ICollection<ProductReviews> ProductReviews  {
-            get { return _productReviews ?? (_productReviews = new List<ProductReviews>()); }
-        }
-
-        //Incudes
-        //Manuals
-
     }
-
-    
-
-
 }

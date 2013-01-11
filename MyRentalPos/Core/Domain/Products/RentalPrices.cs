@@ -5,11 +5,11 @@ using System.Web;
 
 namespace MyRentalPos.Core.Domain.Products
 {
-    public class ProductFeatures : BaseEntity
+    public class RentalPrices : BaseEntity
     {
         public int ProductId { get; set; }
-        public virtual Product Product { get; set; }
-
-        public string Feature { get; set; }
+        public Product Product { get; set; }
+        public string RentalType { get; set; }
+        public int Price { get; set; }
     }
 }

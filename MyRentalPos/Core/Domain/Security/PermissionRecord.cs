@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MyRentalPos.Core.Domain.Customers;
+using MyRentalPos.Core.Domain.Employees;
 
 namespace MyRentalPos.Core.Domain.Security
 {
@@ -8,7 +9,7 @@ namespace MyRentalPos.Core.Domain.Security
     /// </summary>
     public class PermissionRecord : BaseEntity
     {
-        private ICollection<CustomerRole> _customerRole;
+        private ICollection<EmployeeRole> _employeeRole;
 
         public PermissionRecord()
         {
@@ -32,10 +33,10 @@ namespace MyRentalPos.Core.Domain.Security
         /// Gets or sets discount usage history
         /// </summary>
 
-        public virtual ICollection<CustomerRole> CustomerRoles
+        public virtual ICollection<EmployeeRole> CustomerRoles
         {
-            get { return _customerRole ?? (_customerRole = new List<CustomerRole>()); }
-            protected set { _customerRole = value; }
+            get { return _employeeRole ?? (_employeeRole = new List<EmployeeRole>()); }
+            protected set { _employeeRole = value; }
         }
 
     }

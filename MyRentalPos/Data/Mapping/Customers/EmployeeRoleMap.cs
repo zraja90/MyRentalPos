@@ -1,18 +1,20 @@
 using System.Data.Entity.ModelConfiguration;
-using MyRentalPos.Core.Domain.Customers;
+using MyRentalPos.Core.Domain.Employees;
 
 namespace MyRentalPos.Data.Mapping.Customers
 {
-    public partial class CustomerRoleMap : EntityTypeConfiguration<CustomerRole>
+    public partial class EmployeeRoleMap : EntityTypeConfiguration<EmployeeRole>
     {
-        public CustomerRoleMap()
+        public EmployeeRoleMap()
         {
             // Primary Key
             this.HasKey(t => t.Id);
 
+            Property(x => x.Active);
+
             // Properties
             // Table & Column Mappings
-            this.ToTable("CustomerRole");
+            this.ToTable("EmployeeRole");
 
             // Relationships
             this.HasMany(t => t.PermissionRecords)
@@ -23,8 +25,6 @@ namespace MyRentalPos.Data.Mapping.Customers
                     m.MapLeftKey("CustomerRole_Id");
                     m.MapRightKey("PermissionRecord_Id");
                 });
-
-
         }
     }
 }
