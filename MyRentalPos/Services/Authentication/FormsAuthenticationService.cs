@@ -2,6 +2,7 @@
 using System.Web;
 using System.Web.Security;
 using MyRentalPos.Core.Domain.Customers;
+using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Services.CustomerService;
 
 namespace MyRentalPos.Services.Authentication
@@ -13,7 +14,7 @@ namespace MyRentalPos.Services.Authentication
         private readonly ICustomerService _customerService;
         private readonly TimeSpan _expirationTimeSpan;
 
-        private Customer _cachedCustomer;
+        private Employee _cachedEmployee;
 
         public FormsAuthenticationService(HttpContextBase httpContext,
             ICustomerService customerService)
@@ -23,9 +24,9 @@ namespace MyRentalPos.Services.Authentication
             this._expirationTimeSpan = FormsAuthentication.Timeout;
         }
 
-        public void Login(Customer customer, bool persistentCookie)
+        public void Login(Employee employee, bool persistentCookie)
         {
-            FormsAuthentication.SetAuthCookie(customer.Id.ToString(), persistentCookie);
+            FormsAuthentication.SetAuthCookie(employee.Id.ToString(), persistentCookie);
         }
 
 
@@ -34,10 +35,10 @@ namespace MyRentalPos.Services.Authentication
             FormsAuthentication.SignOut();
         }
 
-        public Customer GetAuthenticatedCustomer()
+        public Employee GetAuthenticatedEmployee()
         {
-            if (_cachedCustomer != null)
-                return _cachedCustomer;
+            if (_cachedEmployee != null)
+                return _cachedEmployee;
 
             if (_httpContext == null ||
                 _httpContext.Request == null ||
@@ -54,8 +55,8 @@ namespace MyRentalPos.Services.Authentication
 
 
             if (customer != null && customer.Active && !customer.Deleted)
-                _cachedCustomer = customer;
-            return _cachedCustomer;
+                _cachedEmployee = customer;
+            return _cachedEmployee;
         }
     }
 }

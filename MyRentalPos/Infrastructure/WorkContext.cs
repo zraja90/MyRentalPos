@@ -7,6 +7,7 @@ using MyRentalPos.Core.Domain.Customers;
 using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Services.Authentication;
 using MyRentalPos.Services.CustomerService;
+using MyRentalPos.Services.Employees;
 
 namespace MyRentalPos.Infrastructure
 {
@@ -36,7 +37,6 @@ namespace MyRentalPos.Infrastructure
         }
         protected Customer GetCurrentCustomer()
         {
-
             if (_cachedEmployee != null)
                 return _cachedEmployee;
 
@@ -46,33 +46,31 @@ namespace MyRentalPos.Infrastructure
             Employee employee = null;
             if (_httpContext != null)
             {
-
-                //customer = _authenticationService.GetAuthenticatedCustomer();
-
+                employee = _authenticationService.GetAuthenticatedEmployee();
             }
 
             //validation
-            if (customer != null && !customer.Deleted && customer.Active)
+            if (employee != null && !employee.Deleted && employee.Active)
             {
                 //update last activity date
-                if (customer.LastActivityDateUtc.AddMinutes(1.0) < DateTime.UtcNow)
+                if (employee.LastActivityDateUtc.AddMinutes(1.0) < DateTime.UtcNow)
                 {
-                    customer.LastActivityDateUtc = DateTime.UtcNow;
-                    _customerService.Update(customer);
+                    employee.LastActivityDateUtc = DateTime.UtcNow;
+                    _employeeService.Update(employee);
                 }
 
                 //update IP address
                 string currentIpAddress = _webHelper.GetCurrentIpAddress();
                 if (!String.IsNullOrEmpty(currentIpAddress))
                 {
-                    if (!currentIpAddress.Equals(customer.LastIpAddress))
+                    if (!currentIpAddress.Equals(employee.LastIpAddress))
                     {
-                        customer.LastIpAddress = currentIpAddress;
-                        _customerService.Update(customer);
+                        employee.LastIpAddress = currentIpAddress;
+                        _employeeService.Update(employee);
                     }
                 }
 
-                _cachedCustomer = customer;
+                _cachedEmployee = employee;
             }
 
             return _cachedCustomer;
@@ -85,7 +83,7 @@ namespace MyRentalPos.Infrastructure
             }
             set
             {
-                _cachedCustomer = value;
+                _cachedEmployee = value;
             }
         }
         public bool IsLoggedIn

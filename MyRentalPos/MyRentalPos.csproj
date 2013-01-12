@@ -287,6 +287,8 @@
     <Compile Include="Services\Email\Token.cs" />
     <Compile Include="Services\Email\Tokenizer.cs" />
     <Compile Include="Services\Email\WorkflowMessageService.cs" />
+    <Compile Include="Services\Employees\EmployeeService.cs" />
+    <Compile Include="Services\Employees\IEmployeeService.cs" />
     <Compile Include="Services\Helpers\DateTimeHelperService.cs" />
     <Compile Include="Services\Helpers\DateTimeSettings.cs" />
     <Compile Include="Services\Helpers\IDateTimeHelperService.cs" />

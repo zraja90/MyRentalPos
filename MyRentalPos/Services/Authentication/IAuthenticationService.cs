@@ -1,11 +1,12 @@
 ﻿using MyRentalPos.Core.Domain.Customers;
+using MyRentalPos.Core.Domain.Employees;
 
 namespace MyRentalPos.Services.Authentication
 {
     public partial interface IAuthenticationService
     {
-        void Login(Customer customer, bool persistentCookie);
+        void Login(Employee employee, bool persistentCookie);
         void Logout();
-        Customer GetAuthenticatedCustomer();
+        Employee GetAuthenticatedEmployee();
     }
 }
