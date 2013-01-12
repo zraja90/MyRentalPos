@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using MyRentalPos.Core.Domain.Customers;
+using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Core.Domain.Security;
 
 namespace MyRentalPos.Services.Security
@@ -41,51 +41,21 @@ namespace MyRentalPos.Services.Security
         /// <param name="permission">Permission</param>
         void InsertPermissionRecord(PermissionRecord permission);
 
-        /// <summary>
-        /// Updates the permission
-        /// </summary>
-        /// <param name="permission">Permission</param>
         void UpdatePermissionRecord(PermissionRecord permission);
 
 
         void InstallPermissions(IPermissionProvider permissionProvider);
 
-        /// <summary>
-        /// Uninstall permissions
-        /// </summary>
-        /// <param name="permissionProvider">Permission provider</param>
         void UninstallPermissions(IPermissionProvider permissionProvider);
     
-        /// <summary>
-        /// Authorize permission
-        /// </summary>
-        /// <param name="permission">Permission record</param>
-        /// <returns>true - authorized; otherwise, false</returns>
         bool Authorize(PermissionRecord permission);
 
-        /// <summary>
-        /// Authorize permission
-        /// </summary>
-        /// <param name="permission">Permission record</param>
-        /// <param name="customer">Customer</param>
-        /// <returns>true - authorized; otherwise, false</returns>
-        bool Authorize(PermissionRecord permission, Customer customer);
+        bool Authorize(PermissionRecord permission, Employee employee);
 
-        bool Authorize(PermissionRecord permission, CustomerRole customerRole);
+        bool Authorize(PermissionRecord permission, EmployeeRole employeeRole);
 
-        /// <summary>
-        /// Authorize permission
-        /// </summary>
-        /// <param name="permissionRecordSystemName">Permission record system name</param>
-        /// <returns>true - authorized; otherwise, false</returns>
         bool Authorize(string permissionRecordSystemName);
 
-        /// <summary>
-        /// Authorize permission
-        /// </summary>
-        /// <param name="permissionRecordSystemName">Permission record system name</param>
-        /// <param name="customer">Customer</param>
-        /// <returns>true - authorized; otherwise, false</returns>
-        bool Authorize(string permissionRecordSystemName, Customer customer);
+        bool Authorize(string permissionRecordSystemName, Employee employee);
     }
 }

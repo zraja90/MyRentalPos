@@ -16,5 +16,6 @@ namespace MyRentalPos.Core
         bool IsLoggedIn { get; }
         string LogoutUrl { get; }
         int StoreId { get; }
+      
     }
 }

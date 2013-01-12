@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MyRentalPos.Core;
 using MyRentalPos.Core.Domain.Customers;
+using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Core.Domain.Security;
 using MyRentalPos.Data;
 
@@ -51,20 +52,20 @@ namespace MyRentalPos.Services.Security
         /// Authorize permission
         /// </summary>
         /// <param name="permissionRecordSystemName">Permission record system name</param>
-        /// <param name="customerRole">Customer role</param>
+        /// <param name="employeeRole">Customer role</param>
         /// <returns>true - authorized; otherwise, false</returns>
-        protected virtual bool Authorize(string permissionRecordSystemName, CustomerRole customerRole)
+        protected virtual bool Authorize(string permissionRecordSystemName, EmployeeRole employeeRole)
         {
             if (String.IsNullOrEmpty(permissionRecordSystemName))
                 return false;
-            
-            string key = string.Format(PERMISSIONS_ALLOWED_KEY, customerRole.Id, permissionRecordSystemName);
-            foreach (var permission1 in customerRole.PermissionRecords)
-                    if (permission1.SystemName.Equals(permissionRecordSystemName, StringComparison.InvariantCultureIgnoreCase))
-                        return true;
 
-                return false;
-            
+            string key = string.Format(PERMISSIONS_ALLOWED_KEY, employeeRole.Id, permissionRecordSystemName);
+            foreach (var permission1 in employeeRole.PermissionRecords)
+                if (permission1.SystemName.Equals(permissionRecordSystemName, StringComparison.InvariantCultureIgnoreCase))
+                    return true;
+
+            return false;
+
         }
 
         #endregion
@@ -72,9 +73,9 @@ namespace MyRentalPos.Services.Security
         #region Methods
 
 
-        public virtual bool Authorize(PermissionRecord permission, CustomerRole customerRole)
+        public virtual bool Authorize(PermissionRecord permission, EmployeeRole employeeRole)
         {
-            return Authorize(permission.SystemName, customerRole);
+            return Authorize(permission.SystemName, employeeRole);
         }
 
         /// <summary>
@@ -88,7 +89,7 @@ namespace MyRentalPos.Services.Security
 
             _permissionPecordRepository.Delete(permission);
 
-           // _cacheManager.RemoveByPattern(PERMISSIONS_PATTERN_KEY);
+            // _cacheManager.RemoveByPattern(PERMISSIONS_PATTERN_KEY);
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace MyRentalPos.Services.Security
                 return null;
 
             var query = from pr in _permissionPecordRepository.Table
-                        where  pr.SystemName == systemName
+                        where pr.SystemName == systemName
                         orderby pr.Id
                         select pr;
 
@@ -161,7 +162,7 @@ namespace MyRentalPos.Services.Security
 
             _permissionPecordRepository.Update(permission);
 
-         //   _cacheManager.RemoveByPattern(PERMISSIONS_PATTERN_KEY);
+            //   _cacheManager.RemoveByPattern(PERMISSIONS_PATTERN_KEY);
         }
 
 
@@ -181,7 +182,7 @@ namespace MyRentalPos.Services.Security
                 }
             }
         }
-        
+
         /// <summary>
         /// Authorize permission
         /// </summary>
@@ -189,7 +190,7 @@ namespace MyRentalPos.Services.Security
         /// <returns>true - authorized; otherwise, false</returns>
         public virtual bool Authorize(PermissionRecord permission)
         {
-           return Authorize(permission, _workContext.CurrentCustomer);
+            return Authorize(permission, _workContext.CurrentEmployee);
         }
 
         /// <summary>
@@ -198,15 +199,15 @@ namespace MyRentalPos.Services.Security
         /// <param name="permission">Permission record</param>
         /// <param name="customer">Customer</param>
         /// <returns>true - authorized; otherwise, false</returns>
-        public virtual bool Authorize(PermissionRecord permission, Customer customer)
+        public virtual bool Authorize(PermissionRecord permission, Employee employee)
         {
             if (permission == null)
                 return false;
 
-            if (customer == null)
+            if (employee == null)
                 return false;
 
-            return Authorize(permission.SystemName, customer);
+            return Authorize(permission.SystemName, employee);
         }
 
         /// <summary>
@@ -216,8 +217,8 @@ namespace MyRentalPos.Services.Security
         /// <returns>true - authorized; otherwise, false</returns>
         public virtual bool Authorize(string permissionRecordSystemName)
         {
-            return Authorize(permissionRecordSystemName, _workContext.CurrentCustomer);
-            
+            return Authorize(permissionRecordSystemName, _workContext.CurrentEmployee);
+
         }
 
         /// <summary>
@@ -226,17 +227,17 @@ namespace MyRentalPos.Services.Security
         /// <param name="permissionRecordSystemName">Permission record system name</param>
         /// <param name="customer">Customer</param>
         /// <returns>true - authorized; otherwise, false</returns>
-        public virtual bool Authorize(string permissionRecordSystemName, Customer customer)
+        public virtual bool Authorize(string permissionRecordSystemName, Employee employee)
         {
             if (String.IsNullOrEmpty(permissionRecordSystemName))
                 return false;
 
-            var customerRoles = customer.CustomerRoles.Where(cr => cr.Active);
+            var customerRoles = employee.EmployeeRoles.Where(cr => cr.Active);
             foreach (var role in customerRoles)
                 if (Authorize(permissionRecordSystemName, role))
                     //yes, we have such permission
                     return true;
-            
+
             //no permission found
             return false;
         }
@@ -258,40 +259,40 @@ namespace MyRentalPos.Services.Security
                     //new permission (install it)
                     permission1 = new PermissionRecord
                                       {
-                        Name = permission.Name,
-                        SystemName = permission.SystemName,
-                        Category = permission.Category,
-                    };
+                                          Name = permission.Name,
+                                          SystemName = permission.SystemName,
+                                          Category = permission.Category,
+                                      };
 
 
                     //default customer role mappings
                     var defaultPermissions = permissionProvider.GetDefaultPermissions();
                     foreach (var defaultPermission in defaultPermissions)
                     {
-                        //var customerRole = _customerService.GetCustomerRoleBySystemName(defaultPermission.CustomerRoleSystemName);
-                       /* if (customerRole == null)
-                        {
-                            //new role (save it)
-                            customerRole = new CustomerRole()
-                            {
-                                Name = defaultPermission.CustomerRoleSystemName,
-                                Active = true,
-                                SystemName = defaultPermission.CustomerRoleSystemName
-                            };
-                            _customerService.InsertCustomerRole(customerRole);
-                        }
+                        //var employeeRole = _customerService.GetCustomerRoleBySystemName(defaultPermission.CustomerRoleSystemName);
+                        /* if (employeeRole == null)
+                         {
+                             //new role (save it)
+                             employeeRole = new CustomerRole()
+                             {
+                                 Name = defaultPermission.CustomerRoleSystemName,
+                                 Active = true,
+                                 SystemName = defaultPermission.CustomerRoleSystemName
+                             };
+                             _customerService.InsertCustomerRole(employeeRole);
+                         }
 
 
-                        var defaultMappingProvided = (from p in defaultPermission.PermissionRecords
-                                                      where p.SystemName == permission1.SystemName
-                                                      select p).Any();
-                        var mappingExists = (from p in customerRole.PermissionRecords
-                                             where p.SystemName == permission1.SystemName
-                                             select p).Any();
-                        if (defaultMappingProvided && !mappingExists)
-                        {
-                            permission1.CustomerRoles.Add(customerRole);
-                        }*/
+                         var defaultMappingProvided = (from p in defaultPermission.PermissionRecords
+                                                       where p.SystemName == permission1.SystemName
+                                                       select p).Any();
+                         var mappingExists = (from p in employeeRole.PermissionRecords
+                                              where p.SystemName == permission1.SystemName
+                                              select p).Any();
+                         if (defaultMappingProvided && !mappingExists)
+                         {
+                             permission1.CustomerRoles.Add(employeeRole);
+                         }*/
                     }
 
                     //save new permission
@@ -301,7 +302,7 @@ namespace MyRentalPos.Services.Security
         }
 
 
-        
+
         #endregion
     }
 }

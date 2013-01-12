@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MyRentalPos.Core;
 using MyRentalPos.Core.Domain.Customers;
+using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Services.Authentication;
 using MyRentalPos.Services.CustomerService;
 
@@ -12,20 +13,20 @@ namespace MyRentalPos.Infrastructure
     public class WorkContext : IWorkContext
     {
         private readonly HttpContextBase _httpContext;
-        private readonly ICustomerService _customerService;
+        private readonly IEmployeeService _employeeService;
         private readonly IAuthenticationService _authenticationService;
         private readonly IWebHelper _webHelper;
-        private Customer _cachedCustomer;
+        private Employee _cachedEmployee;
         
 
         public WorkContext(HttpContextBase httpContext,
-                             ICustomerService customerService,
+                             IEmployeeService employeeService,
                              IAuthenticationService authenticationService,
                              IWebHelper webHelper
                               )
         {
             this._httpContext = httpContext;
-            this._customerService = customerService;
+            this._employeeService = employeeService;
             this._authenticationService = authenticationService;
             this._webHelper = webHelper;
         }
@@ -36,17 +37,17 @@ namespace MyRentalPos.Infrastructure
         protected Customer GetCurrentCustomer()
         {
 
-            if (_cachedCustomer != null)
-                return _cachedCustomer;
+            if (_cachedEmployee != null)
+                return _cachedEmployee;
 
             if (!IsAuthenticated)
                 return null;
 
-            Customer customer = null;
+            Employee employee = null;
             if (_httpContext != null)
             {
 
-                customer = _authenticationService.GetAuthenticatedCustomer();
+                //customer = _authenticationService.GetAuthenticatedCustomer();
 
             }
 

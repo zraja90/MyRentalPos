@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MyRentalPos.Core.Domain.Stores;
 
 namespace MyRentalPos.Core.Domain.Employees
@@ -11,5 +12,13 @@ namespace MyRentalPos.Core.Domain.Employees
         public int StoreId { get; set; }
         public virtual Store Store { get; set; }
         public DateTime CreatedDate { get; set; }
+
+        private ICollection<EmployeeRole> _employeeRoles;
+
+        public ICollection<EmployeeRole> EmployeeRoles
+        {
+            get { return _employeeRoles ?? (_employeeRoles = new List<EmployeeRole>()); }
+            protected set { _employeeRoles = value; }
+        }
     }
 }

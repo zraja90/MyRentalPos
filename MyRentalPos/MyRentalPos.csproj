@@ -188,15 +188,6 @@
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadFilesController.cs" />
-    <Compile Include="Areas\Admin\Models\AllProductsListModel.cs" />
-    <Compile Include="Areas\Admin\Models\Products\ApproveReviewModel.cs" />
-    <Compile Include="Areas\Admin\Models\Products\BrochureModel\ManageBrochureModel.cs" />
-    <Compile Include="Areas\Admin\Models\Products\CreateCategoryModel.cs" />
-    <Compile Include="Areas\Admin\Models\Products\CreateProductModel.cs" />
-    <Compile Include="Areas\Admin\Models\Products\EditBrochureModel.cs" />
-    <Compile Include="Areas\Admin\Models\Products\EditProductModel.cs" />
-    <Compile Include="Areas\Admin\Models\Products\ProductDetailModel.cs" />
-    <Compile Include="Areas\Admin\Models\Products\ViewReviewModel.cs" />
     <Compile Include="Areas\Admin\Models\UploadImages\UploadImageModel.cs" />
     <Compile Include="Areas\Admin\Models\UploadImages\ViewDataUploadFilesResult.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -245,19 +236,11 @@
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\Mapping\Customers\CustomerMap.cs" />
     <Compile Include="Data\Mapping\Customers\EmployeeRoleMap.cs" />
-    <Compile Include="Data\Mapping\Customers\EmailSubscriptionMap.cs" />
     <Compile Include="Data\Mapping\Email\EmailAccountMap.cs" />
     <Compile Include="Data\Mapping\Email\EmailTemplatesMap.cs" />
     <Compile Include="Data\Mapping\Email\QueuedEmailMap.cs" />
     <Compile Include="Data\Mapping\Logging\LogMap.cs" />
-    <Compile Include="Data\Mapping\Products\BrochureMap.cs" />
-    <Compile Include="Data\Mapping\Products\ProductCategoryMap.cs" />
-    <Compile Include="Data\Mapping\Products\ProductFeaturesMap.cs" />
     <Compile Include="Data\Mapping\Products\ProductMap.cs" />
-    <Compile Include="Data\Mapping\Products\ProductReviewsMap.cs" />
-    <Compile Include="Data\Mapping\Products\ProductSpecsMap.cs" />
-    <Compile Include="Data\Mapping\Products\RepairApptMap.cs" />
-    <Compile Include="Data\Mapping\Products\RequestAQuoteMap.cs" />
     <Compile Include="Data\Mapping\Security\PermissionRecordMap.cs" />
     <Compile Include="Data\Mapping\Tasks\ScheduleTaskMap.cs" />
     <Compile Include="Data\SqlWrap.cs" />
@@ -286,14 +269,10 @@
     <Compile Include="Services\Authentication\FormsAuthenticationService.cs" />
     <Compile Include="Services\Authentication\IAuthenticationService.cs" />
     <Compile Include="Services\CrudService.cs" />
-    <Compile Include="Services\CustomerService\ContactUsService.cs" />
     <Compile Include="Services\CustomerService\CustomerRegistrationService.cs" />
     <Compile Include="Services\CustomerService\CustomerService.cs" />
-    <Compile Include="Services\CustomerService\EmailSubscriptionService.cs" />
-    <Compile Include="Services\CustomerService\IContactUsService.cs" />
     <Compile Include="Services\CustomerService\ICustomerRegistrationService.cs" />
     <Compile Include="Services\CustomerService\ICustomerService.cs" />
-    <Compile Include="Services\CustomerService\IEmailSubscriptionService.cs" />
     <Compile Include="Services\Email\EmailAccountService.cs" />
     <Compile Include="Services\Email\EmailSender.cs" />
     <Compile Include="Services\Email\EmailTemplateService.cs" />
@@ -519,6 +498,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\Products\" />
     <Folder Include="Data\Mapping\Common\" />
   </ItemGroup>
   <ItemGroup>
