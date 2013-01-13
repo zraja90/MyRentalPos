@@ -5,9 +5,12 @@ using System.Web;
 using MyRentalPos.Core;
 using MyRentalPos.Core.Domain.Customers;
 using MyRentalPos.Core.Domain.Employees;
+using MyRentalPos.Core.Domain.Stores;
+using MyRentalPos.Helpers;
 using MyRentalPos.Services.Authentication;
 using MyRentalPos.Services.CustomerService;
 using MyRentalPos.Services.Employees;
+using MyRentalPos.Services.Stores;
 
 namespace MyRentalPos.Infrastructure
 {
@@ -17,25 +20,27 @@ namespace MyRentalPos.Infrastructure
         private readonly IEmployeeService _employeeService;
         private readonly IAuthenticationService _authenticationService;
         private readonly IWebHelper _webHelper;
+        private readonly IStoreService _storeService;
         private Employee _cachedEmployee;
-        
+
 
         public WorkContext(HttpContextBase httpContext,
                              IEmployeeService employeeService,
                              IAuthenticationService authenticationService,
-                             IWebHelper webHelper
+                             IWebHelper webHelper, IStoreService storeService
                               )
         {
             this._httpContext = httpContext;
             this._employeeService = employeeService;
             this._authenticationService = authenticationService;
             this._webHelper = webHelper;
+            _storeService = storeService;
         }
         private bool IsAuthenticated
         {
             get { return _httpContext.Request.IsAuthenticated; }
         }
-        protected Customer GetCurrentCustomer()
+        protected Employee GetCurrentEmployee()
         {
             if (_cachedEmployee != null)
                 return _cachedEmployee;
@@ -50,7 +55,7 @@ namespace MyRentalPos.Infrastructure
             }
 
             //validation
-            if (employee != null && !employee.Deleted && employee.Active)
+            if (employee != null && employee.Active)
             {
                 //update last activity date
                 if (employee.LastActivityDateUtc.AddMinutes(1.0) < DateTime.UtcNow)
@@ -59,33 +64,34 @@ namespace MyRentalPos.Infrastructure
                     _employeeService.Update(employee);
                 }
 
-                //update IP address
-                string currentIpAddress = _webHelper.GetCurrentIpAddress();
-                if (!String.IsNullOrEmpty(currentIpAddress))
-                {
-                    if (!currentIpAddress.Equals(employee.LastIpAddress))
-                    {
-                        employee.LastIpAddress = currentIpAddress;
-                        _employeeService.Update(employee);
-                    }
-                }
-
                 _cachedEmployee = employee;
             }
 
-            return _cachedCustomer;
+            return _cachedEmployee;
         }
-        public Customer CurrentCustomer
+        public Employee CurrentEmployee
         {
             get
             {
-                return GetCurrentCustomer();
+                return GetCurrentEmployee();
             }
             set
             {
                 _cachedEmployee = value;
             }
         }
+
+        public Store CurrentStore
+        {
+            get
+            {
+                var store = new Store();
+                if (StoreId > 0)
+                    store = _storeService.GetById(StoreId);
+                return store;
+            }
+        }
+
         public bool IsLoggedIn
         {
             get { return IsAuthenticated; }
@@ -97,5 +103,15 @@ namespace MyRentalPos.Infrastructure
             get { return "http://localhost:65403/"; }
         }
 
+        private int _storeId;
+        public int StoreId
+        {
+            get
+            { //get data from cookie
+                if (_storeId == 0)
+                    _storeId = StoreHelper.GetStoreIdFromCookie();
+                return _storeId; 
+            }
+        }
     }
 }

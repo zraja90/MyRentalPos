@@ -4,6 +4,7 @@ using System.Web.Security;
 using MyRentalPos.Core.Domain.Customers;
 using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Services.CustomerService;
+using MyRentalPos.Services.Employees;
 
 namespace MyRentalPos.Services.Authentication
 {
@@ -11,16 +12,16 @@ namespace MyRentalPos.Services.Authentication
     {
 
         private readonly HttpContextBase _httpContext;
-        private readonly ICustomerService _customerService;
+        private readonly IEmployeeService _employeeService;
         private readonly TimeSpan _expirationTimeSpan;
 
         private Employee _cachedEmployee;
 
         public FormsAuthenticationService(HttpContextBase httpContext,
-            ICustomerService customerService)
+            IEmployeeService employeeService)
         {
             this._httpContext = httpContext;
-            this._customerService = customerService;
+            this._employeeService = employeeService;
             this._expirationTimeSpan = FormsAuthentication.Timeout;
         }
 
@@ -51,10 +52,10 @@ namespace MyRentalPos.Services.Authentication
             //var userName = _httpContext.User.Identity.Name;
             //var user = _userService.GetUserByEmail(userName);
             var customerId = _httpContext.User.Identity.Name;
-            var customer = _customerService.GetById(Convert.ToInt32(customerId));
+            var customer = _employeeService.GetById(Convert.ToInt32(customerId));
 
 
-            if (customer != null && customer.Active && !customer.Deleted)
+            if (customer != null && customer.Active)
                 _cachedEmployee = customer;
             return _cachedEmployee;
         }

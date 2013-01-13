@@ -256,6 +256,7 @@
     <Compile Include="Helpers\HtmlPrefixScopeExtensions.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\PageListHelper.cs" />
+    <Compile Include="Helpers\StoreHelper.cs" />
     <Compile Include="Helpers\TimeRange.cs" />
     <Compile Include="Infrastructure\WorkContext.cs" />
     <Compile Include="Mappers\MappingExtensions.cs" />
@@ -303,6 +304,8 @@
     <Compile Include="Services\Security\IPermissionService.cs" />
     <Compile Include="Services\Security\PermissionService.cs" />
     <Compile Include="Services\Security\StandardPermissionProvider.cs" />
+    <Compile Include="Services\Stores\IStoreService.cs" />
+    <Compile Include="Services\Stores\StoreService.cs" />
     <Compile Include="Services\Tasks\IScheduleTaskService.cs" />
     <Compile Include="Services\Tasks\ITask.cs" />
     <Compile Include="Services\Tasks\ScheduleTaskService.cs" />

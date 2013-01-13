@@ -1,5 +1,7 @@
 using System;
 using MyRentalPos.Core.Domain.Customers;
+using MyRentalPos.Core.Domain.Employees;
+using MyRentalPos.Services.Employees;
 using MyRentalPos.Services.Security;
 
 namespace MyRentalPos.Services.CustomerService
@@ -11,7 +13,7 @@ namespace MyRentalPos.Services.CustomerService
     {
         #region Fields
 
-        private readonly ICustomerService _customerService;
+        private readonly IEmployeeService _employeeService;
         private readonly IEncryptionService _encryptionService;
         //private readonly CustomerSettings _customerSettings;
 
@@ -19,15 +21,11 @@ namespace MyRentalPos.Services.CustomerService
 
         #region Ctor
 
-        /// <summary>
-        /// Ctor
-        /// </summary>
-        /// <param name="customerService">Customer service</param>
-        /// <param name="encryptionService">Encryption service</param>
-        public CustomerRegistrationService(ICustomerService customerService, 
+        
+        public CustomerRegistrationService(IEmployeeService employeeService, 
             IEncryptionService encryptionService)
         {
-            this._customerService = customerService;
+            this._employeeService = employeeService;
             this._encryptionService = encryptionService;
         }
 
@@ -36,20 +34,20 @@ namespace MyRentalPos.Services.CustomerService
         #region Methods
 
 
-        public virtual bool ValidateCustomer(string email, string password)
+        public virtual bool ValidateEmployee(string email, string password)
         {
-            Customer customer = null;
-            customer = _customerService.GetCustomerByUserName(email);
+            Employee employee = null;
+            employee = _employeeService.Get(x => x.Email == email);
 
-            if (customer == null || customer.Deleted || !customer.Active)
+            if (employee == null || !employee.Active)
                 return false;
-            bool isValid = VerifyPassword(password, customer.Password);
+            bool isValid = VerifyPassword(password, employee.Password);
 
             //save last login date
             if (isValid)
             {
-                customer.LastLoginDateUtc = DateTime.UtcNow;
-                _customerService.Update(customer);
+                employee.LastLoginDateUtc = DateTime.UtcNow;
+                _employeeService.Update(employee);
             }
 
             return isValid;

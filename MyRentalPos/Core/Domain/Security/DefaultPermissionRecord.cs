@@ -16,7 +16,7 @@ namespace MyRentalPos.Core.Domain.Security
         /// Gets or sets the customer role system name
         /// </summary>
         //public string CustomerRoleSystemName { get; set; }
-        public string CustomerRoleSystemName { get; set; }
+        public string EmployeeRoleSystemName { get; set; }
 
         /// <summary>
         /// Gets or sets the permissions

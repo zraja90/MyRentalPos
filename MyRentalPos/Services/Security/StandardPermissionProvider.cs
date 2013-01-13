@@ -29,7 +29,7 @@ namespace MyRentalPos.Services.Security
                        {
                            new DefaultPermissionRecord
                                {
-                                   CustomerRoleSystemName = EnumEmployeeRoleNames.Admin,
+                                   EmployeeRoleSystemName = EnumEmployeeRoleNames.Admin.ToString(),
                                    PermissionRecords = new[]
                                                 {
                                                     AccessAdminPanel

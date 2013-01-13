@@ -11,6 +11,7 @@ namespace MyRentalPos.Core.Domain.Employees
         public string Email { get; set; }
         public int StoreId { get; set; }
         public virtual Store Store { get; set; }
+        public bool Active { get; set; }
         public DateTime CreatedDate { get; set; }
 
         private ICollection<EmployeeRole> _employeeRoles;
@@ -20,5 +21,9 @@ namespace MyRentalPos.Core.Domain.Employees
             get { return _employeeRoles ?? (_employeeRoles = new List<EmployeeRole>()); }
             protected set { _employeeRoles = value; }
         }
+
+        public DateTime LastActivityDateUtc { get; set; }
+
+        public DateTime LastLoginDateUtc { get; set; }
     }
 }

@@ -110,9 +110,9 @@ namespace MyRentalPos.Services.Helpers
             //if (_dateTimeSettings.AllowCustomersToSetTimeZone)
             {
                 string timeZoneId = string.Empty;
-                if (customer != null)
+                /*if (customer != null)
                     timeZoneId = customer.TimeZoneId;
-
+                */
                 try
                 {
                     if (!String.IsNullOrEmpty(timeZoneId))

@@ -12,7 +12,7 @@ namespace MyRentalPos.Core
     public interface IWorkContext
     {
         Employee CurrentEmployee { get; set; }
-        Store CurrentStore { get; set; }
+        Store CurrentStore { get; }
         bool IsLoggedIn { get; }
         string LogoutUrl { get; }
         int StoreId { get; }

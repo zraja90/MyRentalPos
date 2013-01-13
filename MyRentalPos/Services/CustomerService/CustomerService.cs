@@ -18,9 +18,6 @@ namespace MyRentalPos.Services.CustomerService
         }
         #endregion
 
-        public Customer GetCustomerByUserName(string email)
-        {
-            return _customerRepository.Get(x => x.UserName == email);
-        }
+      
     }
 }
