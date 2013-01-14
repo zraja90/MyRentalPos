@@ -211,7 +211,9 @@
     <Compile Include="Core\Domain\Logging\Log.cs" />
     <Compile Include="Core\Domain\Logging\LogLevel.cs" />
     <Compile Include="Core\Domain\Orders\EnumOrderStatus.cs" />
+    <Compile Include="Core\Domain\Orders\Order.cs" />
     <Compile Include="Core\Domain\Products\Discounts.cs" />
+    <Compile Include="Core\Domain\Products\EnumRentalType.cs" />
     <Compile Include="Core\Domain\Products\Product.cs" />
     <Compile Include="Core\Domain\Products\RentalPrices.cs" />
     <Compile Include="Core\Domain\Security\DefaultPermissionRecord.cs" />
@@ -235,7 +237,8 @@
     <Compile Include="Data\IDbContext.cs" />
     <Compile Include="Data\IRepository.cs" />
     <Compile Include="Data\Mapping\Customers\CustomerMap.cs" />
-    <Compile Include="Data\Mapping\Customers\EmployeeRoleMap.cs" />
+    <Compile Include="Data\Mapping\Employees\EmployeeMap.cs" />
+    <Compile Include="Data\Mapping\Employees\EmployeeRoleMap.cs" />
     <Compile Include="Data\Mapping\Email\EmailAccountMap.cs" />
     <Compile Include="Data\Mapping\Email\EmailTemplatesMap.cs" />
     <Compile Include="Data\Mapping\Email\QueuedEmailMap.cs" />

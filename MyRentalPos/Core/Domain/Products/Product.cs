@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MyRentalPos.Core.Domain.Stores;
 
 namespace MyRentalPos.Core.Domain.Products
 {
     public class Product : BaseEntity
     {
         public int StoreId { get; set; }
+        public virtual Store Store { get; set; }
         public string Name { get; set; }
         public string Image { get; set; }
         public string Description { get; set; }

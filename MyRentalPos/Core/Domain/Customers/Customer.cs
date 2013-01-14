@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MyRentalPos.Core.Domain.Orders;
 
 namespace MyRentalPos.Core.Domain.Customers
 {
@@ -19,6 +20,7 @@ namespace MyRentalPos.Core.Domain.Customers
 
         private ICollection<CustomerBillingInfo> _customerBillingInfos;
         private ICollection<CustomerShippingInfo> _customerShippingInfos;
+        private ICollection<Order> _orders;
 
         public virtual ICollection<CustomerBillingInfo> CustomerBillingInfos
         {
@@ -29,6 +31,12 @@ namespace MyRentalPos.Core.Domain.Customers
         {
             get { return _customerShippingInfos ?? (_customerShippingInfos = new List<CustomerShippingInfo>()); }
             protected set { _customerShippingInfos = value; }
+        }
+
+        public virtual ICollection<Order> Orders
+        {
+            get { return _orders ?? (_orders = new List<Order>()); }
+            protected set { _orders = value; }
         }
     }
 }

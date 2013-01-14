@@ -33,7 +33,7 @@ namespace MyRentalPos.Core.Domain.Security
         /// Gets or sets discount usage history
         /// </summary>
 
-        public virtual ICollection<EmployeeRole> CustomerRoles
+        public virtual ICollection<EmployeeRole> EmployeeRoles
         {
             get { return _employeeRole ?? (_employeeRole = new List<EmployeeRole>()); }
             protected set { _employeeRole = value; }

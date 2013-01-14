@@ -3,6 +3,9 @@
     public  enum EnumEmployeeRoleNames
     {
         Admin,
-        Employee
+        Employee,
+        AssistantManager,
+        Manager,
+        SuperAdmin
     }
 }

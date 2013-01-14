@@ -2,8 +2,9 @@
 {
     public enum EnumOrderStatus
     {
-        Pending,
-        Approved,
-        Denied
+        Pending =0,
+        Approved =1,
+        Denied=2,
+        Saved=3
     }
 }

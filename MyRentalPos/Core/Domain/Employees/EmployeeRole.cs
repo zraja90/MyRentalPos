@@ -10,7 +10,7 @@ namespace MyRentalPos.Core.Domain.Employees
     public class EmployeeRole : BaseEntity
     {
         private ICollection<PermissionRecord> _permissionRecords;
-        private ICollection<Customer> _customers;
+        private ICollection<Employee> _employees;
         public string Name { get; set; }
         public bool Active { get; set; }
 
@@ -28,10 +28,10 @@ namespace MyRentalPos.Core.Domain.Employees
 
         public bool IsGlobal { get; set; }
 
-        public virtual ICollection<Customer> Customers
+        public virtual ICollection<Employee> Employees
         {
-            get { return _customers ?? (_customers = new List<Customer>()); }
-            protected set { _customers = value; }
+            get { return _employees ?? (_employees = new List<Employee>()); }
+            protected set { _employees = value; }
         }
 
         public virtual ICollection<PermissionRecord> PermissionRecords

@@ -19,7 +19,9 @@ namespace MyRentalPos.Data.Mapping.Products
             this.Property(t => t.Description).IsOptional();
             this.Property(t => t.CreatedDate);
 
-            
+            HasRequired(x => x.Store)
+                .WithMany(x => x.Products)
+                .HasForeignKey(x => x.StoreId);
         }
     }
 }

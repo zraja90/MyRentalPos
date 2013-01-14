@@ -1,7 +1,7 @@
 using System.Data.Entity.ModelConfiguration;
 using MyRentalPos.Core.Domain.Employees;
 
-namespace MyRentalPos.Data.Mapping.Customers
+namespace MyRentalPos.Data.Mapping.Employees
 {
     public partial class EmployeeRoleMap : EntityTypeConfiguration<EmployeeRole>
     {
@@ -18,11 +18,11 @@ namespace MyRentalPos.Data.Mapping.Customers
 
             // Relationships
             this.HasMany(t => t.PermissionRecords)
-                .WithMany(t => t.CustomerRoles)
+                .WithMany(t => t.EmployeeRoles)
                 .Map(m =>
                 {
                     m.ToTable("PermissionRecord_Role_Mapping");
-                    m.MapLeftKey("CustomerRole_Id");
+                    m.MapLeftKey("EmployeeRole_Id");
                     m.MapRightKey("PermissionRecord_Id");
                 });
         }
