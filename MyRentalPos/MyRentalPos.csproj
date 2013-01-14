@@ -210,8 +210,8 @@
     <Compile Include="Core\Domain\Employees\EmployeeRole.cs" />
     <Compile Include="Core\Domain\Logging\Log.cs" />
     <Compile Include="Core\Domain\Logging\LogLevel.cs" />
-    <Compile Include="Core\Domain\Orders\EnumOrderStatus.cs" />
-    <Compile Include="Core\Domain\Orders\Order.cs" />
+    <Compile Include="Core\Domain\Order\EnumOrderStatus.cs" />
+    <Compile Include="Core\Domain\Order\Orders.cs" />
     <Compile Include="Core\Domain\Products\Discounts.cs" />
     <Compile Include="Core\Domain\Products\EnumRentalType.cs" />
     <Compile Include="Core\Domain\Products\Product.cs" />
@@ -245,7 +245,7 @@
     <Compile Include="Data\Mapping\Email\EmailTemplatesMap.cs" />
     <Compile Include="Data\Mapping\Email\QueuedEmailMap.cs" />
     <Compile Include="Data\Mapping\Logging\LogMap.cs" />
-    <Compile Include="Data\Mapping\Orders\OrderMap.cs" />
+    <Compile Include="Data\Mapping\Order\OrdersMap.cs" />
     <Compile Include="Data\Mapping\Products\ProductMap.cs" />
     <Compile Include="Data\Mapping\Products\RentalPricesMap.cs" />
     <Compile Include="Data\Mapping\Security\PermissionRecordMap.cs" />
@@ -270,9 +270,9 @@
     <Compile Include="Infrastructure\WorkContext.cs" />
     <Compile Include="Mappers\MappingExtensions.cs" />
     <Compile Include="Mappers\MappingProfile.cs" />
-    <Compile Include="Migrations\201301142121053_v1.0.cs" />
-    <Compile Include="Migrations\201301142121053_v1.0.Designer.cs">
-      <DependentUpon>201301142121053_v1.0.cs</DependentUpon>
+    <Compile Include="Migrations\201301142128351_v1.0.cs" />
+    <Compile Include="Migrations\201301142128351_v1.0.Designer.cs">
+      <DependentUpon>201301142128351_v1.0.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -523,8 +523,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201301142121053_v1.0.resx">
-      <DependentUpon>201301142121053_v1.0.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201301142128351_v1.0.resx">
+      <DependentUpon>201301142128351_v1.0.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,4 +1,4 @@
-﻿namespace MyRentalPos.Core.Domain.Orders
+﻿namespace MyRentalPos.Core.Domain.Order
 {
     public enum EnumOrderStatus
     {

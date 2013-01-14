@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MyRentalPos.Core.Domain.Orders;
+using MyRentalPos.Core.Domain.Order;
 using MyRentalPos.Core.Domain.Stores;
 
 namespace MyRentalPos.Core.Domain.Customers
@@ -22,7 +22,7 @@ namespace MyRentalPos.Core.Domain.Customers
 
         private ICollection<CustomerBillingInfo> _customerBillingInfos;
         private ICollection<CustomerShippingInfo> _customerShippingInfos;
-        private ICollection<Order> _orders;
+        private ICollection<Orders> _orders;
 
         public virtual ICollection<CustomerBillingInfo> CustomerBillingInfos
         {
@@ -35,9 +35,9 @@ namespace MyRentalPos.Core.Domain.Customers
             protected set { _customerShippingInfos = value; }
         }
 
-        public virtual ICollection<Order> Orders
+        public virtual ICollection<Orders> Orders
         {
-            get { return _orders ?? (_orders = new List<Order>()); }
+            get { return _orders ?? (_orders = new List<Orders>()); }
             protected set { _orders = value; }
         }
     }

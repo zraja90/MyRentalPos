@@ -154,7 +154,7 @@ namespace MyRentalPos.Migrations
                 .Index(t => t.ProductId);
             
             CreateTable(
-                "dbo.Order",
+                "dbo.Orders",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -307,8 +307,8 @@ namespace MyRentalPos.Migrations
             DropIndex("dbo.PermissionRecord_Role_Mapping", new[] { "EmployeeRole_Id" });
             DropIndex("dbo.QueuedEmail", new[] { "EmailAccountId" });
             DropIndex("dbo.CustomerShippingInfo", new[] { "CustomerId" });
-            DropIndex("dbo.Order", new[] { "CustomerId" });
-            DropIndex("dbo.Order", new[] { "StoreId" });
+            DropIndex("dbo.Orders", new[] { "CustomerId" });
+            DropIndex("dbo.Orders", new[] { "StoreId" });
             DropIndex("dbo.RentalPrices", new[] { "ProductId" });
             DropIndex("dbo.Product", new[] { "StoreId" });
             DropIndex("dbo.StoreAddress", new[] { "StoreId" });
@@ -321,8 +321,8 @@ namespace MyRentalPos.Migrations
             DropForeignKey("dbo.PermissionRecord_Role_Mapping", "EmployeeRole_Id", "dbo.EmployeeRole");
             DropForeignKey("dbo.QueuedEmail", "EmailAccountId", "dbo.EmailAccount");
             DropForeignKey("dbo.CustomerShippingInfo", "CustomerId", "dbo.Customer");
-            DropForeignKey("dbo.Order", "CustomerId", "dbo.Customer");
-            DropForeignKey("dbo.Order", "StoreId", "dbo.Store");
+            DropForeignKey("dbo.Orders", "CustomerId", "dbo.Customer");
+            DropForeignKey("dbo.Orders", "StoreId", "dbo.Store");
             DropForeignKey("dbo.RentalPrices", "ProductId", "dbo.Product");
             DropForeignKey("dbo.Product", "StoreId", "dbo.Store");
             DropForeignKey("dbo.StoreAddress", "StoreId", "dbo.Store");
@@ -337,7 +337,7 @@ namespace MyRentalPos.Migrations
             DropTable("dbo.EmailTemplates");
             DropTable("dbo.EmailAccount");
             DropTable("dbo.CustomerShippingInfo");
-            DropTable("dbo.Order");
+            DropTable("dbo.Orders");
             DropTable("dbo.RentalPrices");
             DropTable("dbo.Product");
             DropTable("dbo.StoreAddress");

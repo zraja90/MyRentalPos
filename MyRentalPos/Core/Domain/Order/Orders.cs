@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using MyRentalPos.Core.Domain.Customers;
 using MyRentalPos.Core.Domain.Stores;
 
-namespace MyRentalPos.Core.Domain.Orders
+namespace MyRentalPos.Core.Domain.Order
 {
-    public class Order : BaseEntity
+    public class Orders : BaseEntity
     {
         public int StoreId { get; set; }
         public virtual Store Store { get; set; }

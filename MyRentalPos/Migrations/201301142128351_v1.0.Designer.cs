@@ -11,7 +11,7 @@ namespace MyRentalPos.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201301142121053_v1.0"; }
+            get { return "201301142128351_v1.0"; }
         }
         
         string IMigrationMetadata.Source
