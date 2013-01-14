@@ -44,6 +44,10 @@ namespace MyRentalPos.Data.Mapping.Customers
             
             // Table & Column Mappings
             ToTable("Customer");
+
+            HasRequired(x => x.Store)
+                .WithMany(x => x.Customer)
+                .HasForeignKey(x => x.StoreId);
         }
     }
 }

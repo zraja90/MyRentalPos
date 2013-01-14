@@ -236,7 +236,9 @@
     <Compile Include="Data\EfRepository.cs" />
     <Compile Include="Data\IDbContext.cs" />
     <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\Mapping\Customers\CustomerBillingInfoMap.cs" />
     <Compile Include="Data\Mapping\Customers\CustomerMap.cs" />
+    <Compile Include="Data\Mapping\Customers\CustomerShippingInfoMap.cs" />
     <Compile Include="Data\Mapping\Employees\EmployeeMap.cs" />
     <Compile Include="Data\Mapping\Employees\EmployeeRoleMap.cs" />
     <Compile Include="Data\Mapping\Email\EmailAccountMap.cs" />
@@ -244,7 +246,10 @@
     <Compile Include="Data\Mapping\Email\QueuedEmailMap.cs" />
     <Compile Include="Data\Mapping\Logging\LogMap.cs" />
     <Compile Include="Data\Mapping\Products\ProductMap.cs" />
+    <Compile Include="Data\Mapping\Products\RentalPricesMap.cs" />
     <Compile Include="Data\Mapping\Security\PermissionRecordMap.cs" />
+    <Compile Include="Data\Mapping\Stores\StoreAddressMap.cs" />
+    <Compile Include="Data\Mapping\Stores\StoreMap.cs" />
     <Compile Include="Data\Mapping\Tasks\ScheduleTaskMap.cs" />
     <Compile Include="Data\SqlWrap.cs" />
     <Compile Include="Filters\AdminAuthorizeAttribute.cs" />

@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using MyRentalPos.Core.Domain.Orders;
+using MyRentalPos.Core.Domain.Stores;
 
 namespace MyRentalPos.Core.Domain.Customers
 {
     public class Customer : BaseEntity
     {
         public int StoreId { get; set; }
+        public virtual Store Store { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
