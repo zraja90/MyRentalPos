@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MyRentalPos.Core.Domain.Customers;
 using MyRentalPos.Core.Domain.Employees;
+using MyRentalPos.Core.Domain.Orders;
 using MyRentalPos.Core.Domain.Products;
 
 namespace MyRentalPos.Core.Domain.Stores
@@ -11,6 +12,7 @@ namespace MyRentalPos.Core.Domain.Stores
         private ICollection<StoreAddress> _storeAddress;
         private ICollection<Customer> _customers;
         private ICollection<Product> _products;
+        private ICollection<Order> _orders;
 
         public string StoreName { get; set; }
         public string BaseUrl { get; set; }
@@ -42,6 +44,12 @@ namespace MyRentalPos.Core.Domain.Stores
         {
             get { return _products ?? (_products = new List<Product>()); }
             protected set { _products = value; }
+        }
+
+        public virtual ICollection<Order> Orders
+        {
+            get { return _orders ?? (_orders = new List<Order>()); }
+            protected set { _orders = value; }
         }
     }
 }
