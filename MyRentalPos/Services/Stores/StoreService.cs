@@ -9,8 +9,10 @@ namespace MyRentalPos.Services.Stores
 {
     public class StoreService : CrudService<Store>, IStoreService
     {
-        public StoreService(IRepository<Store> repo) : base(repo)
+        private IRepository<StoreAddress> _storeAddressRepo ;
+        public StoreService(IRepository<Store> repo, IRepository<StoreAddress> storeAddressRepo) : base(repo)
         {
+            _storeAddressRepo = storeAddressRepo;
         }
     }
 }

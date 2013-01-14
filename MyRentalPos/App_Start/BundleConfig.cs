@@ -37,7 +37,7 @@ namespace MyRentalPos.App_Start
                     ));
             //bundles.Add(new StyleBundle("~/Content/fileupload").Include("~/Content/FileUpload/*.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/validation").Include("~/Scripts/bootstrap.validation.js"));
+            bundles.Add(new ScriptBundle("~/bundles/validation").Include("~/Scripts/bootstrap.validation.js", "~/Scripts/knockout-2.2.0.js"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
@@ -45,10 +45,8 @@ namespace MyRentalPos.App_Start
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js"));
-            //bundles.Add(new StyleBundle("~/Content/assets/bootstrap").Include("~/assets/css/bootstrap.min.css"));
-
-
-            var less = new StyleBundle("~/Content/less").Include("~/Content/css/site.less", "~/Content/bootstrap/bootstrap.less",
+            
+            var less = new StyleBundle("~/Content/less").Include("~/Content/site.less", "~/Content/bootstrap/bootstrap.less",
                 "~/Content/css/alignment.less");
 
             less.Transforms.Add(new LessMinify());

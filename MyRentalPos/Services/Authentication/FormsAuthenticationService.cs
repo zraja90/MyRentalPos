@@ -51,12 +51,12 @@ namespace MyRentalPos.Services.Authentication
 
             //var userName = _httpContext.User.Identity.Name;
             //var user = _userService.GetUserByEmail(userName);
-            var customerId = _httpContext.User.Identity.Name;
-            var customer = _employeeService.GetById(Convert.ToInt32(customerId));
+            var employeeId = _httpContext.User.Identity.Name;
+            var employee = _employeeService.GetById(Convert.ToInt32(employeeId));
 
 
-            if (customer != null && customer.Active)
-                _cachedEmployee = customer;
+            if (employee != null && employee.Active)
+                _cachedEmployee = employee;
             return _cachedEmployee;
         }
     }

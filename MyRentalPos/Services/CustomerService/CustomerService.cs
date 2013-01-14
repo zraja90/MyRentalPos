@@ -8,16 +8,8 @@ namespace MyRentalPos.Services.CustomerService
     /// </summary>
     public partial class CustomerService : CrudService<Customer>, ICustomerService
     {
-        #region Ctor
-
-        private readonly IRepository<Customer> _customerRepository; 
-        public CustomerService(IRepository<Customer> customerRepository)
-            : base(customerRepository)
+        public CustomerService(IRepository<Customer> repo) : base(repo)
         {
-            _customerRepository = customerRepository;
         }
-        #endregion
-
-      
     }
 }

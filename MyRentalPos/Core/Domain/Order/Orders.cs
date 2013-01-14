@@ -12,6 +12,7 @@ namespace MyRentalPos.Core.Domain.Order
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
+        public EnumOrderStatus OrderStatus { get; set; }
         public DateTime CreatedDate { get; set; }
     }
 }

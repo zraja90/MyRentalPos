@@ -14,6 +14,7 @@ namespace MyRentalPos.Migrations
 
         protected override void Seed(MyRentalPos.Data.AppContext context)
         {
+            InitMigrationSeed.Seed(context);
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
