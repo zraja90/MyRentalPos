@@ -100,7 +100,7 @@ namespace MyRentalPos.Infrastructure
 
         public string LogoutUrl
         {
-            get { return "http://localhost:65403/"; }
+            get { return "/"; }
         }
 
         private int _storeId;

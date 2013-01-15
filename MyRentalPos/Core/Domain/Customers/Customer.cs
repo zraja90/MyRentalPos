@@ -19,7 +19,7 @@ namespace MyRentalPos.Core.Domain.Customers
         public string City { get; set; }
         public string State { get; set; }
         public string ZipCode { get; set; }
-
+        public DateTime CreatedDate { get; set; }
         private ICollection<CustomerBillingInfo> _customerBillingInfos;
         private ICollection<CustomerShippingInfo> _customerShippingInfos;
         private ICollection<Orders> _orders;

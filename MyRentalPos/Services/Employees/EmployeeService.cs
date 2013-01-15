@@ -12,5 +12,10 @@ namespace MyRentalPos.Services.Employees
         public EmployeeService(IRepository<Employee> repo) : base(repo)
         {
         }
+
+        public Employee GetCustomerByUserName(string userName)
+        {
+            return repo.Get(x => x.UserName == userName);
+        }
     }
 }

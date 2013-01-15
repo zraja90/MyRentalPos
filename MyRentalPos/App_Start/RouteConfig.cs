@@ -25,6 +25,7 @@ namespace MyRentalPos
                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                namespaces: new[] { "MyRentalPos.Controllers" }
            );
+
         }
     }
 }

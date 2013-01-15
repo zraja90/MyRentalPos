@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MyRentalPos.Core.Domain.Customers;
 using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Core.Domain.Products;
@@ -22,6 +23,7 @@ namespace MyRentalPos.Core.Domain.Stores
         public bool IsGlobal { get; set; }
         public string Owner { get; set; }
         public string Email { get; set; }
+        public DateTime CreateDated { get; set; }
 
         public virtual ICollection<Employee> Employees
         {

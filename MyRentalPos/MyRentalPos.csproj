@@ -186,10 +186,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CommonController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StoreController.cs" />
+    <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadFilesController.cs" />
+    <Compile Include="Areas\Admin\Models\Store\CreateStoreModel.cs" />
     <Compile Include="Areas\Admin\Models\UploadImages\UploadImageModel.cs" />
     <Compile Include="Areas\Admin\Models\UploadImages\ViewDataUploadFilesResult.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Core\AppException.cs" />
@@ -279,9 +284,13 @@
     <Compile Include="Migrations\201301142144338_v1.1.Designer.cs">
       <DependentUpon>201301142144338_v1.1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201301151936305_v1.2.cs" />
+    <Compile Include="Migrations\201301151936305_v1.2.Designer.cs">
+      <DependentUpon>201301151936305_v1.2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\InitMigrationSeed.cs" />
-    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\Common\ContactUsModel.cs" />
     <Compile Include="Models\Common\HeaderModel.cs" />
     <Compile Include="Models\NotifyType.cs" />
@@ -464,6 +473,7 @@
     <Content Include="Areas\Admin\Views\UploadFiles\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Store\Create.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\bootstrap.js" />
@@ -553,9 +563,11 @@
     <Content Include="Upload\UploadHandler.ashx" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\Order.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\Models\Customer\" />
     <Folder Include="Areas\Admin\Models\Products\" />
     <Folder Include="Data\Mapping\Common\" />
   </ItemGroup>
@@ -568,6 +580,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201301142144338_v1.1.resx">
       <DependentUpon>201301142144338_v1.1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201301151936305_v1.2.resx">
+      <DependentUpon>201301151936305_v1.2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

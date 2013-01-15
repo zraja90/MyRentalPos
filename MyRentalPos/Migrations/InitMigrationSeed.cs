@@ -4,6 +4,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using MyRentalPos.Core.Domain.Customers;
 using MyRentalPos.Core.Domain.Email;
+using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Core.Domain.Security;
 using MyRentalPos.Core.Domain.Stores;
 using MyRentalPos.Core.Domain.Tasks;
@@ -20,6 +21,32 @@ namespace MyRentalPos.Migrations
             InitStore(context);
             InitEmailAccount(context);
             InitScheduleTask(context);
+            InitEmployee(context);
+        }
+
+        private static void InitEmployee(AppContext context)
+        {
+            var settings = new List<Employee>
+                               {
+                                   new Employee
+                                       {
+                                           StoreId = 1,
+                                           UserName = "zee",
+                                           Active = true,
+                                           CreatedDate = DateTime.UtcNow,
+                                           Email = "me@a.com",
+                                           FirstName = "John",
+                                           LastName = "Smith",
+                                           LastActivityDateUtc = DateTime.UtcNow,
+                                           LastLoginDateUtc = DateTime.UtcNow,
+                                           Password = "AJr8zm5tyOB2NDsch4xx5u17SmJTS1DPOjjBQ4m6FJJSxxcBSSkQXAHGhCgyUKIL5A=="
+                                       }
+                               };
+            if (!context.Set<Employee>().Any())
+            {
+                settings.ForEach(x=>context.Set<Employee>().AddOrUpdate(x));
+            }
+            context.SaveChanges();
         }
 
         private static void InitStore(AppContext context)
@@ -29,13 +56,13 @@ namespace MyRentalPos.Migrations
                                    new Store
                                        {
                                            BaseUrl = "http://localhost:53646",
-                                           Email = "aa",
-                                           StoreName = "TD",
+                                           Email = "zraja90@gmail.com",
+                                           StoreName = "My Rental Pos",
                                            IsActive = true,
                                            Image = "",
                                            IsGlobal = true,
                                            LogOutUrl = "http://localhost:53646",
-                                           Owner = "Me"
+                                           Owner = "Zeeshan Raja"
                                        }
                                };
             if (!context.Set<Store>().Any())
@@ -108,11 +135,11 @@ namespace MyRentalPos.Migrations
         {
             var customer = new Customer()
             {
-                CompanyName = "temp",
-                Email = "super@unigo.com",
+                CompanyName = "My Rental Pos",
+                Email = "guest@myrentalpos.com",
                 //Password = "AJr8zm5tyOB2NDsch4xx5u17SmJTS1DPOjjBQ4m6FJJSxxcBSSkQXAHGhCgyUKIL5A==",
-                FirstName = "unigo",
-                LastName = "unigo",
+                FirstName = "Guest",
+                LastName = "User",
                 StoreId=1,
                 ZipCode = "",
                 Address = "",

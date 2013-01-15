@@ -5,7 +5,7 @@ namespace MyRentalPos.Services.Employees
     /// </summary>
     public partial interface IEmployeeRegistrationService
     {
-        bool ValidateEmployee(string email, string password);
+        bool ValidateEmployee(string username, string password);
 
         //CustomerRegistrationResult RegisterCustomer(CustomerRegistrationRequest request);
 

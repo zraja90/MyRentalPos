@@ -9,5 +9,6 @@ namespace MyRentalPos.Services.Employees
 {
     public interface IEmployeeService : ICrudService<Employee>
     {
+        Employee GetCustomerByUserName(string userName);
     }
 }

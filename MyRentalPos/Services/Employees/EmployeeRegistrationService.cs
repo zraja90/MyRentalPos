@@ -33,10 +33,10 @@ namespace MyRentalPos.Services.Employees
         #region Methods
 
 
-        public virtual bool ValidateEmployee(string email, string password)
+        public virtual bool ValidateEmployee(string username, string password)
         {
             Employee employee = null;
-            employee = _employeeService.Get(x => x.Email == email);
+            employee = _employeeService.Get(x => x.UserName == username);
 
             if (employee == null || !employee.Active)
                 return false;
