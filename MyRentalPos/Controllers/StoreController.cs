@@ -41,10 +41,5 @@ namespace MyRentalPos.Controllers
             }
             return RedirectToAction("Error", "Error");
         }
-
-        //
-        // GET: /Admin/StoreController/Details/5
-
-       
     }
 }
