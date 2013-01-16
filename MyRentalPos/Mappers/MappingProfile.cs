@@ -12,11 +12,8 @@ namespace MyRentalPos.Mappers
         }
         protected override void Configure()
         {
-            Mapper.CreateMap<Store, StoreModel>();
-            Mapper.CreateMap<StoreModel, Store>();
-
-            Mapper.CreateMap<StoreModel, StoreAddress>();
-            Mapper.CreateMap<StoreAddress, StoreModel>();
+            //Mapper.CreateMap<Store, StoreModel>();
+            //Mapper.CreateMap<StoreModel, Store>();
         }
     }
 }

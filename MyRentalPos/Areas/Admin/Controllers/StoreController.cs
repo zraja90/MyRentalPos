@@ -11,6 +11,7 @@ using MyRentalPos.Filters;
 using MyRentalPos.Filters.Helpers;
 using MyRentalPos.Mappers;
 using MyRentalPos.Services.Stores;
+using Newtonsoft.Json;
 
 namespace MyRentalPos.Areas.Admin.Controllers
 {
@@ -53,7 +54,10 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var model = new StoreModel();
+            var model = new CreateStoreModel();
+            model.Store = new Store();
+            model.StoreAddress = new List<StoreAddress>();
+            model.JsonModel = JsonConvert.SerializeObject(model);
 
             return View(model);
         }
@@ -63,9 +67,22 @@ namespace MyRentalPos.Areas.Admin.Controllers
         {
             try
             {
-                var entity = model.ToEntity();
-                entity.LogOutUrl = model.BaseUrl;
-                _storeService.Add(entity);
+                //var storeEntity = model;
+                //storeEntity.LogOutUrl = model.BaseUrl;
+                //_storeService.Add(storeEntity);
+                //var addressEntity = new StoreAddress
+                //                        {
+                //                            Address = model.Address,
+                //                            City = model.City,
+                //                            State = model.State,
+                //                            StoreId = storeEntity.Id,
+                //                            PhoneNumber = model.PhoneNumber,
+                //                            ZipCode = model.ZipCode,
+                //                            FaxNumber = model.FaxNumber,
+                //                            Country = model.Country
+                //                        };
+                ////storeEntity.StoreAddress = addressEntity;
+                //_storeService.Update(storeEntity);
                 this.SuccessNotification("Store was created.");
 
                 return RedirectToAction("Index");
@@ -79,8 +96,12 @@ namespace MyRentalPos.Areas.Admin.Controllers
         public ActionResult Edit(int id)
         {
             var entity = _storeService.GetById(id);
-            var model = entity.ToModel();
-            return View(model);
+            //var model = entity;
+            var address = entity.StoreAddress;
+
+            //model.Address = address.Address;
+
+            return View();
         }
 
         [HttpPost]
@@ -88,13 +109,14 @@ namespace MyRentalPos.Areas.Admin.Controllers
         {
             try
             {
-                var entity = model.ToEntity();
-                if (string.IsNullOrEmpty(entity.LogOutUrl))
-                    entity.LogOutUrl = model.BaseUrl;
-                _storeService.AddOrUpdate(entity);
+                //var entity = model.ToEntity();
+
+                //if (string.IsNullOrEmpty(entity.LogOutUrl))
+                  //  entity.LogOutUrl = model.BaseUrl;
+            //    _storeService.AddOrUpdate(entity);
 
 
-                this.SuccessNotification(entity.StoreName + " has been updated");
+              //  this.SuccessNotification(entity.StoreName + " has been updated");
 
                 return RedirectToAction("Index");
             }

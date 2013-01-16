@@ -1,4 +1,4 @@
-﻿@model MyRentalPos.Areas.Admin.Models.Store.StoreModel
+﻿@model MyRentalPos.Areas.Admin.Models.Store.CreateStoreModel
 
 @{
     ViewBag.Title = "Create Store";
@@ -6,11 +6,13 @@
 
 <h2>Create Your Store</h2>
 
+
+
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true)
     <div class="form-horizontal">
-        <div class="control-group">
+        @*   <div class="control-group">
             @Html.LabelFor(model => model.StoreName, new { Class = "control-label" })
             <div class="controls">
                 @Html.EditorFor(model => model.StoreName)
@@ -27,7 +29,7 @@
         <div class="control-group">
             @Html.LabelFor(model => model.EmailAddress, new { Class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.EmailAddress, new {type="email"})
+                @Html.TextBoxFor(model => model.EmailAddress, new { type = "email" })
                 @Html.ValidationMessageFor(model => model.EmailAddress)
             </div>
         </div>
@@ -44,16 +46,9 @@
                 @Html.EditorFor(model => model.Image)
                 @Html.ValidationMessageFor(model => model.Image)
             </div>
-        </div>
-        <div class="control-group">
-            <div class="controls">
-                <label class="checkbox">
-                    @Html.CheckBoxFor(model => model.IsActive) @Html.LabelFor(model => model.IsActive)
-                    @Html.ValidationMessageFor(model => model.IsActive)
-                </label>
-            </div>
-        </div>
-        <div class="control-group">
+        </div>*@
+
+        @* <div class="control-group">
             @Html.LabelFor(model => model.Address, new { Class = "control-label" })
             <div class="controls">
                 @Html.EditorFor(model => model.Address)
@@ -94,9 +89,132 @@
                 @Html.EditorFor(model => model.FaxNumber)
                 @Html.ValidationMessageFor(model => model.FaxNumber)
             </div>
-        </div>
-       
-        <button type="submit" class="btn btn-primary">Create</button>
+        </div>*@
+        @* <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.IsActive) @Html.LabelFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive)
+                </label>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>*@
     </div>
-    
 }
+<form data-bind="submit: addTask ">
+    Add Address For Each Location: 
+    <input  data-bind="value: newAddress" />
+    @*<table class="table table-striped">
+        <tr>
+            <th>Store Address
+            </th>
+            <th>City
+            </th>
+            <th>State</th>
+
+
+        </tr>
+        <tr>
+            <td>
+                <input type="text" data-bind="value: Address" />
+            </td>
+            <td>
+                <input type="text" data-bind="value: City" />
+            </td>
+            <td>
+                <input type="text" data-bind="value: State" />
+            </td>
+
+        </tr>
+    </table>
+    <table class="table table-striped">
+        <tr>
+            <th>PhoneNumber</th>
+            <th>FaxNumber</th>
+            <th>ZipCode</th>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" data-bind="value: ZipCode" />
+            </td>
+            <td>
+                <input type="text" data-bind="value: PhoneNumber" />
+            </td>
+            <td>
+                <input type="text" data-bind="value: FaxNumber" />
+            </td>
+        </tr>
+    </table>*@
+    <button type="submit" class="btn">Add Location</button>
+</form>
+<ul data-bind="foreach: tasks, visible:tasks().length>0">
+    <li>
+        <input type="text" data-bind="value: City" />
+
+        <a href="#" data-bind="click: $parent.removeTask">Delete</a>
+    </li>
+</ul>
+<textarea name="tasks" data-bind="value: ko.toJSON(tasks)"></textarea>
+<script>
+    function Task(data) {
+        this.title = ko.observable(data.title);
+        //this.City = ko.observable(data.City); 
+        //this.State = ko.observable(data.State); 
+        //this.ZipCode = ko.observable(data.ZipCode); 
+        //this.PhoneNumber = ko.observable(data.PhoneNumber); 
+        //this.FaxNumber = ko.observable(data.FaxNumber);
+    }
+    //function StoreModel(data) {
+    //    debugger;
+    //    this.StoreName = ko.observable(data.StoreName);
+    //    this.BaseUrl = ko.observable(data.BaseUrl); 
+    //    this.Image = ko.observable(data.Image); 
+    //    this.IsActive = ko.observable(data.IsActive); 
+    //    this.Owner = ko.observable(data.Owner); 
+    //    this.EmailAddress = ko.observable(data.EmailAddress); 
+    //}
+    
+    function StoreViewModel() {
+        debugger;
+        var self = this;
+        self.tasks = ko.observable([]);
+        // self.Store = ko.observable();
+        self.newAddress = ko.observable(); 
+        //self.City = ko.observable(); 
+        //self.State = ko.observable(); 
+        //self.ZipCode = ko.observable(); 
+        //self.PhoneNumber = ko.observable(); 
+        //self.FaxNumber = ko.observable();
+
+       // var addressMapped = $.map(data.StoreAddress, function (item) { return new Address(item); });
+        //var storeMapped = $.map(data.Store, function (item) { return new Store(item); });
+        //self.Store(storeMapped);
+        //self.Addresses(addressMapped);
+    }
+    self.addTask = function () {
+        self.tasks.push(new Task({ title: this.newAddress() }));
+        self.newAddress("");
+    };
+  /*  self.addAddress =function () {
+        self.Addresses.push(
+            new AddressModel(
+                    {
+                        Address: this.newAddress(),
+                        //City: this.City(),
+                        //State: this.State(),
+                        //FaxNumber: this.FaxNumber(),
+                        //PhoneNumber: this.PhoneNumber(),
+                        //ZipCode: this.ZipCode()
+                    }
+            ));
+        debugger;
+        self.newAddress("");
+        //self.City (""); 
+        //self.State (""); 
+        //self.ZipCode (""); 
+        //self.PhoneNumber (""); 
+        //self.FaxNumber ("");
+    };*/
+
+    ko.applyBindings(new StoreViewModel());
+</script>

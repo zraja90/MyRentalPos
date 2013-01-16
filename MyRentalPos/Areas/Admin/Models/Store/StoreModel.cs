@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using MyRentalPos.Core.Domain.Stores;
 
 namespace MyRentalPos.Areas.Admin.Models.Store
 {
@@ -10,6 +12,7 @@ namespace MyRentalPos.Areas.Admin.Models.Store
         {
             IsGlobal = false;
             CreatedDate = DateTime.UtcNow;
+            //Country = "USA";
         }
         public int Id { get; set; }
         [Required]
@@ -35,14 +38,33 @@ namespace MyRentalPos.Areas.Admin.Models.Store
         public string EmailAddress { get; set; }
 
         public DateTime CreatedDate { get; set; }
-
-        public int StoreId { get; set; }
-        public string Address { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
-        public string Country { get; set; }
-        public string PhoneNumber { get; set; }
-        public string FaxNumber { get; set; }
+        //public int StoreId { get; set; }
+        //[Required]
+        //[DisplayName("Address")]
+        //public string Address { get; set; }
+        //[Required]
+        //[DisplayName("City")]
+        //public string City { get; set; }
+        //[Required]
+        //[DisplayName("State")]
+        //public string State { get; set; }
+        //[Required]
+        //[DisplayName("Zip Code")]
+        //public string ZipCode { get; set; }
+        //[Required]
+        //[DisplayName("Country")]
+        //public string Country { get; set; }
+        //[Required]
+        //[DisplayName("Primary Phone Number")]
+        //public string PhoneNumber { get; set; }
+        
+        //[DisplayName("Primary Fax Number")]
+        //public string FaxNumber { get; set; }
+    }
+    public class CreateStoreModel
+    {
+        public Core.Domain.Stores.Store Store { get; set; }
+        public List<StoreAddress> StoreAddress { get; set; }
+        public string JsonModel { get; set; }
     }
 }
