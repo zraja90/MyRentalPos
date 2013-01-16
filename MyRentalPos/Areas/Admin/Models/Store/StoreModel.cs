@@ -4,14 +4,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyRentalPos.Areas.Admin.Models.Store
 {
-    public class CreateStoreModel
+    public class StoreModel
     {
-        public CreateStoreModel()
+        public StoreModel()
         {
             IsGlobal = false;
             CreatedDate = DateTime.UtcNow;
         }
-
+        public int Id { get; set; }
         [Required]
         [DisplayName("Store Name")]
         public string StoreName { get; set; }

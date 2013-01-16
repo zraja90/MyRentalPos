@@ -1,4 +1,4 @@
-﻿@model MyRentalPos.Areas.Admin.Controllers.EditStoreModel
+﻿@model MyRentalPos.Areas.Admin.Models.Store.StoreModel
 
 @{
     ViewBag.Title = "Edit";
@@ -10,49 +10,50 @@
     @Html.ValidationSummary(true)
 
     @Html.ValidationSummary(true)
+    @Html.HiddenFor(x=>x.Id)
     <div class="form-horizontal">
         <div class="control-group">
-            @Html.LabelFor(model => model.Store.StoreName, new { Class = "control-label" })
+            @Html.LabelFor(model => model.StoreName, new { Class = "control-label" })
             <div class="controls">
-                @Html.EditorFor(model => model.Store.StoreName)
-                @Html.ValidationMessageFor(model => model.Store.StoreName)
+                @Html.EditorFor(model => model.StoreName)
+                @Html.ValidationMessageFor(model => model.StoreName)
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.Store.Owner, new { Class = "control-label" })
+            @Html.LabelFor(model => model.Owner, new { Class = "control-label" })
             <div class="controls">
-                @Html.EditorFor(model => model.Store.Owner)
-                @Html.ValidationMessageFor(model => model.Store.Owner)
+                @Html.EditorFor(model => model.Owner)
+                @Html.ValidationMessageFor(model => model.Owner)
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.Store.Email, new { Class = "control-label" })
+            @Html.LabelFor(model => model.EmailAddress, new { Class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.Store.Email, new {type="email"})
-                @Html.ValidationMessageFor(model => model.Store.Email)
+                @Html.TextBoxFor(model => model.EmailAddress, new {type="email"})
+                @Html.ValidationMessageFor(model => model.EmailAddress)
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.Store.BaseUrl, new { Class = "control-label" })
+            @Html.LabelFor(model => model.BaseUrl, new { Class = "control-label" })
             <div class="controls">
-                @Html.EditorFor(model => model.Store.BaseUrl)<span>.myrentalpos.com</span>
-                @Html.ValidationMessageFor(model => model.Store.BaseUrl)
+                @Html.TextBoxFor(x=>x.BaseUrl,new {disabled="disabled"})
+                @Html.HiddenFor(x=>x.BaseUrl)
             </div>
         </div>
         <div class="control-group">
-            @Html.LabelFor(model => model.Store.Image, new { Class = "control-label" })
+            @Html.LabelFor(model => model.Image, new { Class = "control-label" })
             <div class="controls">
-                @Html.EditorFor(model => model.Store.Image)
-                @Html.ValidationMessageFor(model => model.Store.Image)
+                @Html.EditorFor(model => model.Image)
+                @Html.ValidationMessageFor(model => model.Image)
             </div>
         </div>
         <div class="control-group">
             <div class="controls">
                 <label class="checkbox">
-                    @Html.CheckBoxFor(model => model.Store.IsActive) @Html.LabelFor(model => model.Store.IsActive)
-                    @Html.ValidationMessageFor(model => model.Store.IsActive)
+                    @Html.CheckBoxFor(model => model.IsActive) @Html.LabelFor(model => model.IsActive)
+                    @Html.ValidationMessageFor(model => model.IsActive)
                 </label>
-                <button type="submit" class="btn btn-primary">Create</button>
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>

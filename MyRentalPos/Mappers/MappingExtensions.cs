@@ -6,17 +6,17 @@ namespace MyRentalPos.Mappers
 {
     public static class MappingExtensions
     {
-        public static CreateStoreModel ToModel(this Store entity)
+        public static StoreModel ToModel(this Store entity)
         {
-            return Mapper.Map<Store, CreateStoreModel>(entity);
+            return Mapper.Map<Store, StoreModel>(entity);
         }
 
-        public static Store ToEntity(this CreateStoreModel model)
+        public static Store ToEntity(this StoreModel model)
         {
-            return Mapper.Map<CreateStoreModel, Store>(model);
+            return Mapper.Map<StoreModel, Store>(model);
         }
 
-        public static Store ToEntity(this CreateStoreModel model, Store destination)
+        public static Store ToEntity(this StoreModel model, Store destination)
         {
             return Mapper.Map(model, destination);
         }

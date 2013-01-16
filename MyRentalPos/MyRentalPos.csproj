@@ -192,7 +192,7 @@
     <Compile Include="Areas\Admin\Models\Store\AllStoresModel.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadFilesController.cs" />
-    <Compile Include="Areas\Admin\Models\Store\CreateStoreModel.cs" />
+    <Compile Include="Areas\Admin\Models\Store\StoreModel.cs" />
     <Compile Include="Areas\Admin\Models\UploadImages\UploadImageModel.cs" />
     <Compile Include="Areas\Admin\Models\UploadImages\ViewDataUploadFilesResult.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -292,6 +292,10 @@
     <Compile Include="Migrations\201301160514113_v1.3.cs" />
     <Compile Include="Migrations\201301160514113_v1.3.Designer.cs">
       <DependentUpon>201301160514113_v1.3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201301161705031_v1.4.cs" />
+    <Compile Include="Migrations\201301161705031_v1.4.Designer.cs">
+      <DependentUpon>201301161705031_v1.4.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\InitMigrationSeed.cs" />
@@ -596,6 +600,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201301160514113_v1.3.resx">
       <DependentUpon>201301160514113_v1.3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201301161705031_v1.4.resx">
+      <DependentUpon>201301161705031_v1.4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

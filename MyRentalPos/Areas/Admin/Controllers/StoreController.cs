@@ -8,6 +8,7 @@ using MyRentalPos.Core;
 using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Core.Domain.Stores;
 using MyRentalPos.Filters;
+using MyRentalPos.Filters.Helpers;
 using MyRentalPos.Mappers;
 using MyRentalPos.Services.Stores;
 
@@ -29,7 +30,7 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var model = new AllStoresModel {Stores = _storeService.GetAll()};
+            var model = new AllStoresModel { Stores = _storeService.GetAll() };
 
             return View(model);
         }
@@ -57,7 +58,7 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var model = new CreateStoreModel();
+            var model = new StoreModel();
             return View(model);
         }
 
@@ -66,19 +67,20 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
 
         [HttpPost]
-        public ActionResult Create(CreateStoreModel model)
+        public ActionResult Create(StoreModel model)
         {
             try
             {
                 var entity = model.ToEntity();
                 entity.LogOutUrl = model.BaseUrl;
                 _storeService.Add(entity);
+                this.SuccessNotification("Store was created.");
 
                 return RedirectToAction("Index");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                
+                this.ErrorNotification("There was an error in creating the store. Please try again.");
                 return View();
             }
         }
@@ -88,8 +90,8 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            var model = new EditStoreModel();
-            model.Store = _storeService.GetById(id);
+            var entity =_storeService.GetById(id);
+            var model = entity.ToModel();
             return View(model);
         }
 
@@ -97,51 +99,25 @@ namespace MyRentalPos.Areas.Admin.Controllers
         // POST: /Admin/StoreController/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(StoreModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                var entity = model.ToEntity();
+                if (string.IsNullOrEmpty(entity.LogOutUrl))
+                    entity.LogOutUrl = model.BaseUrl;
+                _storeService.AddOrUpdate(entity);
+                
+                
+                this.SuccessNotification(entity.StoreName + " has been updated");
 
                 return RedirectToAction("Index");
             }
             catch
             {
+                this.ErrorNotification("There was an error in updating. Please check the information entered and submit again");
                 return View();
             }
         }
-
-        //
-        // GET: /Admin/StoreController/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Admin/StoreController/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
-
-    
-
-    public class EditStoreModel
-    {
-        public Store Store { get; set; }
     }
 }
