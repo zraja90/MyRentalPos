@@ -1,0 +1,63 @@
+﻿@model MyRentalPos.Areas.Admin.Controllers.EditStoreModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    @Html.ValidationSummary(true)
+    <div class="form-horizontal">
+        <div class="control-group">
+            @Html.LabelFor(model => model.Store.StoreName, new { Class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Store.StoreName)
+                @Html.ValidationMessageFor(model => model.Store.StoreName)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Store.Owner, new { Class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Store.Owner)
+                @Html.ValidationMessageFor(model => model.Store.Owner)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Store.Email, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Store.Email, new {type="email"})
+                @Html.ValidationMessageFor(model => model.Store.Email)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Store.BaseUrl, new { Class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Store.BaseUrl)<span>.myrentalpos.com</span>
+                @Html.ValidationMessageFor(model => model.Store.BaseUrl)
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Store.Image, new { Class = "control-label" })
+            <div class="controls">
+                @Html.EditorFor(model => model.Store.Image)
+                @Html.ValidationMessageFor(model => model.Store.Image)
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.Store.IsActive) @Html.LabelFor(model => model.Store.IsActive)
+                    @Html.ValidationMessageFor(model => model.Store.IsActive)
+                </label>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

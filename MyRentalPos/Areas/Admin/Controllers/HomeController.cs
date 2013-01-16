@@ -11,7 +11,6 @@ using MyRentalPos.Helpers;
 
 namespace MyRentalPos.Areas.Admin.Controllers
 {
-    [AdminAuthorize]
     public class HomeController : Controller
     {
         //

@@ -189,6 +189,7 @@
     <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoreController.cs" />
+    <Compile Include="Areas\Admin\Models\Store\AllStoresModel.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadFilesController.cs" />
     <Compile Include="Areas\Admin\Models\Store\CreateStoreModel.cs" />
@@ -288,6 +289,10 @@
     <Compile Include="Migrations\201301151936305_v1.2.Designer.cs">
       <DependentUpon>201301151936305_v1.2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201301160514113_v1.3.cs" />
+    <Compile Include="Migrations\201301160514113_v1.3.Designer.cs">
+      <DependentUpon>201301160514113_v1.3.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\InitMigrationSeed.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -353,6 +358,8 @@
     <Content Include="Content\bootstrap-responsive.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\FileUpload\bootstrap-image-gallery.min.css" />
+    <Content Include="Content\FileUpload\jquery.fileupload-ui.css" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\bootstrap\accordion.less" />
@@ -474,6 +481,8 @@
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Store\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Store\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Store\Edit.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\bootstrap.js" />
@@ -583,6 +592,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201301151936305_v1.2.resx">
       <DependentUpon>201301151936305_v1.2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201301160514113_v1.3.resx">
+      <DependentUpon>201301160514113_v1.3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

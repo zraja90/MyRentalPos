@@ -66,7 +66,7 @@ namespace MyRentalPos.Migrations
                                            IsGlobal = true,
                                            LogOutUrl = "http://localhost:53646",
                                            Owner = "Zeeshan Raja",
-                                           CreateDated = DateTime.UtcNow
+                                           CreatedDate = DateTime.UtcNow
                                        }
                                };
             if (!context.Set<Store>().Any())

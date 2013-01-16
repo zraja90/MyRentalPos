@@ -4,13 +4,21 @@ using System.IO;
 using System.Web;
 using System.Web.Mvc;
 using MyRentalPos.Areas.Admin.Models.UploadImages;
+using MyRentalPos.Core;
 using MyRentalPos.Filters;
 
 namespace MyRentalPos.Areas.Admin.Controllers
 {
-    [AdminAuthorize]
+    
     public class UploadFilesController : Controller
     {
+        private readonly IWorkContext _workContext;
+        
+        public UploadFilesController(IWorkContext workContext)
+        {
+            _workContext = workContext;
+        }
+
         //
         // GET: /UploadFiles/
 
@@ -22,37 +30,47 @@ namespace MyRentalPos.Areas.Admin.Controllers
         public ActionResult AllPictures()
        {
            var model = new List<UploadImageModel>();
-           var path = Server.MapPath("/content/images/products/");
+
+           var storeId = _workContext.StoreId;
+           var path = Server.MapPath("/content/images/products/" + storeId);
 
            var folder = new DirectoryInfo(path);
-           var images = folder.GetFiles();
-           
-           string[] sizes = { "B", "KB", "MB", "GB" };
-           
-
-           for (int i = 0; i < images.Length; i++)
+           if(folder.Exists)
            {
-               if (images[i].Extension != ".db")
+               var images = folder.GetFiles();
+               string[] sizes = { "B", "KB", "MB", "GB" };
+
+
+               foreach (var t in images)
                {
-                   double len = images[i].Length;
-                   int order = 0;
-                   while (len >= 1024 && order + 1 < sizes.Length)
+                   if (t.Extension != ".db")
                    {
-                       order++;
-                       len = len/1024;
+                       double len = t.Length;
+                       int order = 0;
+                       while (len >= 1024 && order + 1 < sizes.Length)
+                       {
+                           order++;
+                           len = len / 1024;
+                       }
+
+                       string result = String.Format("{0:0.##} {1}", len, sizes[order]);
+                       var item = new UploadImageModel
+                                      {
+                                          Name = t.Name,
+                                          FileSize = result,
+                                          ImageUrl = t.DirectoryName
+                                      };
+                       model.Add(item);
+
                    }
-                   
-                   string result = String.Format("{0:0.##} {1}", len, sizes[order]);
-                   var item = new UploadImageModel
-                                  {
-                                      Name = images[i].Name,
-                                      FileSize = result,
-                                      ImageUrl = images[i].DirectoryName 
-                                  };
-                   model.Add(item);
-                   
                }
            }
+           else
+           {
+               folder.Create();
+           }
+           
+           
            
            return PartialView(model);
         }

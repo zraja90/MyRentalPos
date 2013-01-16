@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using MyRentalPos.Areas.Admin.Models.Store;
+using MyRentalPos.Core.Domain.Stores;
 
 namespace MyRentalPos.Mappers
 {
@@ -10,6 +12,8 @@ namespace MyRentalPos.Mappers
         }
         protected override void Configure()
         {
+            Mapper.CreateMap<Store, CreateStoreModel>();
+            Mapper.CreateMap<CreateStoreModel, Store>();
         }
     }
 }

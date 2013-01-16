@@ -4,18 +4,34 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyRentalPos.Areas.Admin.Models.Store;
+using MyRentalPos.Core.Domain.Stores;
+using MyRentalPos.Filters;
+using MyRentalPos.Mappers;
+using MyRentalPos.Services.Stores;
 
 namespace MyRentalPos.Areas.Admin.Controllers
 {
+    //[AdminAuthorize]
     public class StoreController : Controller
     {
+        private readonly IStoreService _storeService;
+        public StoreController(IStoreService storeService)
+        {
+            _storeService = storeService;
+        }
+
         //
         // GET: /Admin/Store/
 
         public ActionResult Index()
         {
-            return View();
+            var model = new AllStoresModel();
+            model.Stores = _storeService.GetAll();
+
+            return View(model);
         }
+
+
 
         public ActionResult Details(int id)
         {
@@ -35,17 +51,19 @@ namespace MyRentalPos.Areas.Admin.Controllers
         // POST: /Admin/StoreController/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CreateStoreModel model)
         {
             try
             {
-                // TODO: Add insert logic here
+                var entity = model.ToEntity();
+                
+                _storeService.Add(entity);
 
-                //return RedirectToAction("Index");
-                return View();
+                return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
+                
                 return View();
             }
         }
@@ -55,7 +73,9 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var model = new EditStoreModel();
+            model.Store = _storeService.GetById(id);
+            return View(model);
         }
 
         //
@@ -101,5 +121,10 @@ namespace MyRentalPos.Areas.Admin.Controllers
                 return View();
             }
         }
+    }
+
+    public class EditStoreModel
+    {
+        public Store Store { get; set; }
     }
 }

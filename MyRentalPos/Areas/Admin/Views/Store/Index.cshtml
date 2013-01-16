@@ -1,0 +1,25 @@
+﻿@model MyRentalPos.Areas.Admin.Models.Store.AllStoresModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>All Stores</h2>
+@Html.ActionLink("Create New Store", "Create")
+<table class="table table-striped">
+    <tr>
+        <th>Store Name</th>
+        <th>Store Owner</th>
+        <th>Store Active</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var item in Model.Stores)
+    {
+        <tr>
+            <td>@item.StoreName</td>
+            <td>@item.Owner</td>
+            <td>@item.IsActive</td>
+            <td>@Html.ActionLink("Edit", "Edit", new { id = item.Id })</td>
+        </tr>
+    }
+</table>
