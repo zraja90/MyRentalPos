@@ -16,12 +16,15 @@ namespace MyRentalPos.Migrations
     {
         public static void Seed(AppContext context)
         {
+
+            InitStore(context);
+            InitEmployee(context);
             InitPermissions(context);
             InitCustomers(context);
-            InitStore(context);
+            
             InitEmailAccount(context);
             InitScheduleTask(context);
-            InitEmployee(context);
+            
         }
 
         private static void InitEmployee(AppContext context)
@@ -30,7 +33,7 @@ namespace MyRentalPos.Migrations
                                {
                                    new Employee
                                        {
-                                           StoreId = 1,
+                                           StoreId = 3,
                                            UserName = "zee",
                                            Active = true,
                                            CreatedDate = DateTime.UtcNow,
@@ -62,7 +65,8 @@ namespace MyRentalPos.Migrations
                                            Image = "",
                                            IsGlobal = true,
                                            LogOutUrl = "http://localhost:53646",
-                                           Owner = "Zeeshan Raja"
+                                           Owner = "Zeeshan Raja",
+                                           CreateDated = DateTime.UtcNow
                                        }
                                };
             if (!context.Set<Store>().Any())
@@ -140,12 +144,13 @@ namespace MyRentalPos.Migrations
                 //Password = "AJr8zm5tyOB2NDsch4xx5u17SmJTS1DPOjjBQ4m6FJJSxxcBSSkQXAHGhCgyUKIL5A==",
                 FirstName = "Guest",
                 LastName = "User",
-                StoreId=1,
+                StoreId=3,
                 ZipCode = "",
                 Address = "",
                 City = "",
                 PhoneNumber = "",
-                State = ""
+                State = "",
+                CreatedDate = DateTime.UtcNow
             };
 
 
