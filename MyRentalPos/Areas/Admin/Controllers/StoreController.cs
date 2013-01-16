@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyRentalPos.Areas.Admin.Models.Store;
+using MyRentalPos.Core;
+using MyRentalPos.Core.Domain.Employees;
 using MyRentalPos.Core.Domain.Stores;
 using MyRentalPos.Filters;
 using MyRentalPos.Mappers;
@@ -15,9 +17,11 @@ namespace MyRentalPos.Areas.Admin.Controllers
     public class StoreController : Controller
     {
         private readonly IStoreService _storeService;
-        public StoreController(IStoreService storeService)
+        private readonly IWorkContext _workContext;
+        public StoreController(IStoreService storeService, IWorkContext workContext)
         {
             _storeService = storeService;
+            _workContext = workContext;
         }
 
         //
@@ -25,19 +29,29 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var model = new AllStoresModel();
-            model.Stores = _storeService.GetAll();
+            var model = new AllStoresModel {Stores = _storeService.GetAll()};
 
             return View(model);
         }
 
 
-
-        public ActionResult Details(int id)
+        [ChildActionOnly]
+        public ActionResult LeftMenu()
         {
-            return View();
+            var model = new LeftMenuModel
+            {
+                IsLoggedIn = _workContext.IsLoggedIn,
+                Employee = _workContext.CurrentEmployee,
+                Store = _workContext.CurrentStore
+            };
+            return PartialView(model);
         }
-
+        public class LeftMenuModel
+        {
+            public bool IsLoggedIn { get; set; }
+            public Employee Employee { get; set; }
+            public Store Store { get; set; }
+        }
         //
         // GET: /Admin/StoreController/Create
 
@@ -50,13 +64,14 @@ namespace MyRentalPos.Areas.Admin.Controllers
         //
         // POST: /Admin/StoreController/Create
 
+
         [HttpPost]
         public ActionResult Create(CreateStoreModel model)
         {
             try
             {
                 var entity = model.ToEntity();
-                
+                entity.LogOutUrl = model.BaseUrl;
                 _storeService.Add(entity);
 
                 return RedirectToAction("Index");
@@ -122,6 +137,8 @@ namespace MyRentalPos.Areas.Admin.Controllers
             }
         }
     }
+
+    
 
     public class EditStoreModel
     {

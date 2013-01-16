@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace MyRentalPos.Helpers.Extensions
 {
@@ -63,6 +64,25 @@ namespace MyRentalPos.Helpers.Extensions
             builder.SetInnerText(innerText);
             // Render tag
             return MvcHtmlString.Create(builder.ToString());
+        }
+        public static MvcHtmlString MenuLink(this HtmlHelper htmlHelper, string linkText, string actionName, string controllerName, object routeValues = null, object htmlAttributes = null)
+        {
+            string currentAction = htmlHelper.ViewContext.ParentActionViewContext.RouteData.GetRequiredString("action");
+            string currentController = htmlHelper.ViewContext.ParentActionViewContext.RouteData.GetRequiredString("controller");
+
+            var sb = new StringBuilder("<li");
+
+            if (actionName == currentAction && controllerName == currentController)
+            {
+                sb.Append(" class=\"active\"");
+            }
+
+            sb.Append(">");
+            sb.Append(htmlHelper.ActionLink(linkText, actionName, controllerName, routeValues, htmlAttributes).ToString());
+            sb.Append("</li>");
+            return MvcHtmlString.Create(sb.ToString());
+
+
         }
         #region Helpers
 

@@ -22,7 +22,7 @@ namespace MyRentalPos.Core.Domain.Stores
         public bool IsActive { get; set; }
         public bool IsGlobal { get; set; }
         public string Owner { get; set; }
-        public string Email { get; set; }
+        public string EmailAddress { get; set; }
         public DateTime CreatedDate { get; set; }
 
         public virtual ICollection<Employee> Employees

@@ -35,8 +35,12 @@
         </div>
         <div id="mainContainer" class="container margin-bottom">
             <section class="row-fluid margin-bottom">
-                <div class="span12">
-                    @Html.Partial("_Notifications")
+                <div class="span2">
+                        @Html.Action("LeftMenu", "Store", new { Area = "Admin" })
+                    </div>
+                <div class="span10">
+                @Html.Partial("_Notifications")    
+                    
                     @RenderBody()
                 </div>
             </section>

@@ -59,7 +59,7 @@ namespace MyRentalPos.Migrations
                                    new Store
                                        {
                                            BaseUrl = "http://localhost:53646",
-                                           Email = "zraja90@gmail.com",
+                                           EmailAddress = "zraja90@gmail.com",
                                            StoreName = "My Rental Pos",
                                            IsActive = true,
                                            Image = "",

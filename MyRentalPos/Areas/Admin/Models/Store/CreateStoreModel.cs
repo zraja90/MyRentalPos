@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace MyRentalPos.Areas.Admin.Models.Store
 {
@@ -28,7 +25,7 @@ namespace MyRentalPos.Areas.Admin.Models.Store
         [Required]
         [DisplayName("Is Store Active?")]
         public bool IsActive { get; set; }
-        [DisplayName("Global Store")]
+        [DisplayName("Global Store?")]
         public bool IsGlobal { get; set; }
         [Required]
         [DisplayName("Store Owner")]
