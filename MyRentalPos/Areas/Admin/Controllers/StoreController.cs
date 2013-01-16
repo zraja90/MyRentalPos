@@ -25,9 +25,6 @@ namespace MyRentalPos.Areas.Admin.Controllers
             _workContext = workContext;
         }
 
-        //
-        // GET: /Admin/Store/
-
         public ActionResult Index()
         {
             var model = new AllStoresModel { Stores = _storeService.GetAll() };
@@ -53,18 +50,13 @@ namespace MyRentalPos.Areas.Admin.Controllers
             public Employee Employee { get; set; }
             public Store Store { get; set; }
         }
-        //
-        // GET: /Admin/StoreController/Create
 
         public ActionResult Create()
         {
             var model = new StoreModel();
+
             return View(model);
         }
-
-        //
-        // POST: /Admin/StoreController/Create
-
 
         [HttpPost]
         public ActionResult Create(StoreModel model)
@@ -84,19 +76,12 @@ namespace MyRentalPos.Areas.Admin.Controllers
                 return View();
             }
         }
-
-        //
-        // GET: /Admin/StoreController/Edit/5
-
         public ActionResult Edit(int id)
         {
-            var entity =_storeService.GetById(id);
+            var entity = _storeService.GetById(id);
             var model = entity.ToModel();
             return View(model);
         }
-
-        //
-        // POST: /Admin/StoreController/Edit/5
 
         [HttpPost]
         public ActionResult Edit(StoreModel model)
@@ -107,8 +92,8 @@ namespace MyRentalPos.Areas.Admin.Controllers
                 if (string.IsNullOrEmpty(entity.LogOutUrl))
                     entity.LogOutUrl = model.BaseUrl;
                 _storeService.AddOrUpdate(entity);
-                
-                
+
+
                 this.SuccessNotification(entity.StoreName + " has been updated");
 
                 return RedirectToAction("Index");
