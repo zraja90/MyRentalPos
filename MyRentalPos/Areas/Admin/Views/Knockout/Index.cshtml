@@ -81,7 +81,7 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
 
 <textarea name="tasks" data-bind="value: ko.toJSON(addresses)"></textarea>
 <script>
-    function Address(data) {
+    function Store(data) {
         this.address = ko.observable(data.address);
         this.city = ko.observable(data.city);
         this.state = ko.observable(data.state);
@@ -89,25 +89,29 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
         this.phonenumber = ko.observable(data.phonenumber);
         this.faxnumber = ko.observable(data.faxnumber);
         this.storeName = ko.observable(data.storeName);
+        this.baseurl = ko.observable(data.baseurl);
+        this.image = ko.observable(data.image);
     }
 
     function TaskListViewModel() {
         // Data
         var self = this;
         self.addresses = ko.observableArray([]);
+        //Address Fields
         self.newAddressText = ko.observable();
         self.newCityText = ko.observable();
         self.newStateText = ko.observable();
         self.newZipCodeText = ko.observable();
         self.newPhoneNumberText = ko.observable();
         self.newFaxNumberText = ko.observable();
+        //Store Fields
         self.newStoreNameText = ko.observable();
         self.newBaseUrlText = ko.observable();
-        self.newImageText = ko.
-        
+        self.newImageText = ko.observable();
+        self.newIsActiveText = ko.observable();
         // Operations
         self.addStoreAddress = function () {
-            self.addresses.push(new Address(
+            self.addresses.push(new Store(
                 {
                     address: this.newAddressText(),
                     city: this.newCityText(),
@@ -115,8 +119,9 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
                     zipcode: this.newZipCodeText(),
                     phonenumber: this.newPhoneNumberText(),
                     faxnumber: this.newFaxNumberText(),
-                    storeName: this.newStoreNameText()
-
+                    storeName: this.newStoreNameText(),
+                    baseurl: this.newBaseUrlText(),
+                    image: this.newImageText()
                 }));
             self.newAddressText("");
         };
@@ -125,7 +130,7 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
 
     ko.applyBindings(new TaskListViewModel());
 </script>
-public int Id { get; set; }
+@*public int Id { get; set; }
         public string StoreName { get; set; }
         public string BaseUrl { get; set; }
         public string LogOutUrl { get; set; }
@@ -133,4 +138,4 @@ public int Id { get; set; }
         public bool IsActive { get; set; }
         public bool IsGlobal { get; set; }
         public string Owner { get; set; }
-        public string EmailAddress { get; set; }
+        public string EmailAddress { get; set; }*@
