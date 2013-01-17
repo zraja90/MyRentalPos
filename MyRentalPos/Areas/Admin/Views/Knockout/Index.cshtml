@@ -88,6 +88,7 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
         this.zipcode = ko.observable(data.zipcode);
         this.phonenumber = ko.observable(data.phonenumber);
         this.faxnumber = ko.observable(data.faxnumber);
+        this.storeName = ko.observable(data.storeName);
     }
 
     function TaskListViewModel() {
@@ -100,6 +101,9 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
         self.newZipCodeText = ko.observable();
         self.newPhoneNumberText = ko.observable();
         self.newFaxNumberText = ko.observable();
+        self.newStoreNameText = ko.observable();
+        self.newBaseUrlText = ko.observable();
+        self.newImageText = ko.
         
         // Operations
         self.addStoreAddress = function () {
@@ -110,7 +114,8 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
                     state: this.newStateText(),
                     zipcode: this.newZipCodeText(),
                     phonenumber: this.newPhoneNumberText(),
-                    faxnumber: this.newFaxNumberText()
+                    faxnumber: this.newFaxNumberText(),
+                    storeName: this.newStoreNameText()
 
                 }));
             self.newAddressText("");
@@ -120,3 +125,12 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
 
     ko.applyBindings(new TaskListViewModel());
 </script>
+public int Id { get; set; }
+        public string StoreName { get; set; }
+        public string BaseUrl { get; set; }
+        public string LogOutUrl { get; set; }
+        public string Image { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsGlobal { get; set; }
+        public string Owner { get; set; }
+        public string EmailAddress { get; set; }
