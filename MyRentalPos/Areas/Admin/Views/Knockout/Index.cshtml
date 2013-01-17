@@ -1,0 +1,122 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+
+<h3>Create Your Store</h3>
+
+<form data-bind="submit: addStoreAddress" class="form-horizontal">
+    <div class="control-group">
+        <label class="control-label">
+            Address
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newAddressText" placeholder="Street Address" required="required" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            City
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newCityText" placeholder="Add City" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            State
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newStateText" placeholder="Add State" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Zip Code
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newZipCodeText" placeholder="Add Zip Code" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Phone Number
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newPhoneNumberText" placeholder="Add Phone Number" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Fax Number
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newFaxNumberText" placeholder="Add Fax Number" />
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn">Add</button>
+</form>
+
+<ul class="unstyled" data-bind="foreach: addresses, visible: addresses().length > 0">
+    <li>
+        <input data-bind="value: address" /></li>
+    <li>
+        <input data-bind="value: city" /></li>
+    <li>
+        <input data-bind="value: state" /></li>
+    <li>
+        <input data-bind="value: zipcode" /></li>
+    <li>
+        <input data-bind="value: phonenumber" /></li>
+    <li>
+        <input data-bind="value: faxnumber" /></li>
+    <li>
+        <a href="#" data-bind="click: $parent.removeTask">Delete</a>
+    </li>
+</ul>
+
+You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
+
+<textarea name="tasks" data-bind="value: ko.toJSON(addresses)"></textarea>
+<script>
+    function Address(data) {
+        this.address = ko.observable(data.address);
+        this.city = ko.observable(data.city);
+        this.state = ko.observable(data.state);
+        this.zipcode = ko.observable(data.zipcode);
+        this.phonenumber = ko.observable(data.phonenumber);
+        this.faxnumber = ko.observable(data.faxnumber);
+    }
+
+    function TaskListViewModel() {
+        // Data
+        var self = this;
+        self.addresses = ko.observableArray([]);
+        self.newAddressText = ko.observable();
+        self.newCityText = ko.observable();
+        self.newStateText = ko.observable();
+        self.newZipCodeText = ko.observable();
+        self.newPhoneNumberText = ko.observable();
+        self.newFaxNumberText = ko.observable();
+        
+        // Operations
+        self.addStoreAddress = function () {
+            self.addresses.push(new Address(
+                {
+                    address: this.newAddressText(),
+                    city: this.newCityText(),
+                    state: this.newStateText(),
+                    zipcode: this.newZipCodeText(),
+                    phonenumber: this.newPhoneNumberText(),
+                    faxnumber: this.newFaxNumberText()
+
+                }));
+            self.newAddressText("");
+        };
+        self.removeTask = function (addresses) { self.addresses.remove(addresses); };
+    }
+
+    ko.applyBindings(new TaskListViewModel());
+</script>
