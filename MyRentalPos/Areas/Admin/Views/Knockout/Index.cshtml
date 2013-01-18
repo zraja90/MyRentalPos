@@ -8,6 +8,47 @@
 <form data-bind="submit: addStoreAddress" class="form-horizontal">
     <div class="control-group">
         <label class="control-label">
+            Store Name
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newStoreNameText" placeholder="Store Name" required="required" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Store URL
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newBaseUrlText" placeholder="Store URL" required="required" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Store Logo
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newImageText" placeholder="Store Logo" required="required" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Store Owner
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newOwnerText" placeholder="Store Owner" required="required" />
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">
+            Owner Email Address
+        </label>
+        <div class="controls">
+            <input type="text" data-bind="value: newEmailText" placeholder="Store Email Address" required="required" />
+        </div>
+    </div>
+
+     <div class="control-group">
+        <label class="control-label">
             Address
         </label>
         <div class="controls">
@@ -54,9 +95,7 @@
             <input type="text" data-bind="value: newFaxNumberText" placeholder="Add Fax Number" />
         </div>
     </div>
-
-
-    <button type="submit" class="btn">Add</button>
+    <button type="submit" class="btn">Add Location</button>
 </form>
 
 <ul class="unstyled" data-bind="foreach: addresses, visible: addresses().length > 0">
@@ -91,6 +130,10 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
         this.storeName = ko.observable(data.storeName);
         this.baseurl = ko.observable(data.baseurl);
         this.image = ko.observable(data.image);
+        
+        this.active = ko.observable(data.active);
+        this.owner = ko.observable(data.owner);
+        this.email = ko.observable(data.email);
     }
 
     function TaskListViewModel() {
@@ -108,7 +151,11 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
         self.newStoreNameText = ko.observable();
         self.newBaseUrlText = ko.observable();
         self.newImageText = ko.observable();
+
+        
         self.newIsActiveText = ko.observable();
+        self.newOwnerText = ko.observable();
+        self.newEmailText = ko.observable();
         // Operations
         self.addStoreAddress = function () {
             self.addresses.push(new Store(
@@ -121,7 +168,11 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
                     faxnumber: this.newFaxNumberText(),
                     storeName: this.newStoreNameText(),
                     baseurl: this.newBaseUrlText(),
-                    image: this.newImageText()
+                    image: this.newImageText(),
+                    
+                    active: this.newIsActiveText(),
+                    owner: this.newOwnerText(),
+                    email: this.newEmailText()
                 }));
             self.newAddressText("");
         };
