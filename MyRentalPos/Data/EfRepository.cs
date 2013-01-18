@@ -39,7 +39,7 @@ namespace MyRentalPos.Data
 
         public IEnumerable<T> GetAll()
         {
-            return this.Entities.ToList();
+           return this.Entities.ToList();
         }
 
         public IEnumerable<T> GetMany(Expression<Func<T, bool>> where)

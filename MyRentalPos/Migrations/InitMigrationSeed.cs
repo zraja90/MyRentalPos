@@ -33,7 +33,7 @@ namespace MyRentalPos.Migrations
                                {
                                    new Employee
                                        {
-                                           StoreId = 3,
+                                           StoreId = 1,
                                            UserName = "zee",
                                            Active = true,
                                            CreatedDate = DateTime.UtcNow,
@@ -144,7 +144,7 @@ namespace MyRentalPos.Migrations
                 //Password = "AJr8zm5tyOB2NDsch4xx5u17SmJTS1DPOjjBQ4m6FJJSxxcBSSkQXAHGhCgyUKIL5A==",
                 FirstName = "Guest",
                 LastName = "User",
-                StoreId=3,
+                StoreId=1,
                 ZipCode = "",
                 Address = "",
                 City = "",
