@@ -409,6 +409,8 @@
     <Content Include="Content\bootstrap\utilities.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\wells.less" />
+    <Content Include="Content\jquery.pnotify.default.css" />
+    <Content Include="Content\jquery.pnotify.default.icons.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\site.less" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />

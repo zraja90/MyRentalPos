@@ -1,60 +1,89 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
+<script src="/Scripts/jquery.pnotify.js"></script>
 <script src="/Scripts/FuelUx/require.js"></script>
 <script src="/Scripts/FuelUx/wizard.js"></script>
+<link rel="stylesheet"  href="/Content/jquery.pnotify.default.css"/>
+<link rel="stylesheet" href="/Content/jquery.pnotify.default.icons.css"/>
 <h3>Create Your Store</h3>
-<div class="wizard">
+<div class="wizard" id="mywizard">
     <ul class="steps">
-        <li data-target="#step1">
+        <li data-target="#step1" class="active">
             <span class="badge badge-info">1</span>Step 1
+            <span class="chevron"></span>
+        </li>
+        <li data-target="#step2">
+            <span class="badge badge-info">2</span>Step 2
             <span class="chevron"></span>
         </li>
     </ul>
 </div>
-<form data-bind="submit: addStoreAddress" class="form-horizontal">
-    <div class="control-group">
-        <label class="control-label">
-            Store Name
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newStoreNameText" placeholder="Store Name" required="required" />
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">
-            Store URL
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newBaseUrlText" placeholder="Store URL" required="required" />
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">
-            Store Logo
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newImageText" placeholder="Store Logo" required="required" />
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">
-            Store Owner
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newOwnerText" placeholder="Store Owner" required="required" />
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">
-            Owner Email Address
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newEmailText" placeholder="Store Email Address" required="required" />
-        </div>
-    </div>
+<div class="step-content">
+    <div class="step-pane active" id="step1">
+        <form data-bind="submit: createStore" class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label">
+                    Store Name
+                </label>
+                <div class="controls">
+                    <input type="text" data-bind="value: newStoreNameText" placeholder="Store Name" required="required" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    Store URL
+                </label>
+                <div class="controls">
+                    <input type="text" data-bind="value: newBaseUrlText" placeholder="Store URL" required="required" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    Store Logo
+                </label>
+                <div class="controls">
+                    <input type="text" data-bind="value: newImageText" placeholder="Store Logo" required="required" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    Store Owner
+                </label>
+                <div class="controls">
+                    <input type="text" data-bind="value: newOwnerText" placeholder="Store Owner" required="required" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">
+                    Owner Email Address
+                </label>
+                <div class="controls">
+                    <input type="text" data-bind="value: newEmailText" placeholder="Store Email Address" required="required" />
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <label class="checkbox">
+                        <input type="checkbox" data-bind="checked: newIsActiveText" />
+                        Is Active? 
+                    </label>
+                    <button type="submit" id="wizard-next" class="btn btn-primary">Create</button>
+                </div>
+            </div>
 
-     <div class="control-group">
+        </form>
+
+    </div>
+    <div class="step-pane" id="step2">Step 2</div>
+</div>
+You currently have <b data-bind="text: store().length">&nbsp;</b> locations
+
+<textarea name="tasks" data-bind="value: ko.toJSON(store)"></textarea>
+<div class="hide">
+<form data-bind="submit: addStoreAddress" class="form-horizontal">
+
+    <div class="control-group">
         <label class="control-label">
             Address
         </label>
@@ -104,7 +133,6 @@
     </div>
     <button type="submit" class="btn">Add Location</button>
 </form>
-
 <ul class="unstyled" data-bind="foreach: addresses, visible: addresses().length > 0">
     <li>
         <input data-bind="value: address" /></li>
@@ -122,31 +150,34 @@
         <a href="#" data-bind="click: $parent.removeTask">Delete</a>
     </li>
 </ul>
+    
 
-You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
-
-<textarea name="tasks" data-bind="value: ko.toJSON(addresses)"></textarea>
+    </div>
 <script>
-    function Store(data) {
+  
+    function StoreAddress(data) {
         this.address = ko.observable(data.address);
         this.city = ko.observable(data.city);
         this.state = ko.observable(data.state);
         this.zipcode = ko.observable(data.zipcode);
         this.phonenumber = ko.observable(data.phonenumber);
         this.faxnumber = ko.observable(data.faxnumber);
-        this.storeName = ko.observable(data.storeName);
-        this.baseurl = ko.observable(data.baseurl);
-        this.image = ko.observable(data.image);
-        
-        this.active = ko.observable(data.active);
-        this.owner = ko.observable(data.owner);
-        this.email = ko.observable(data.email);
+    }
+    function Store(data) {
+        this.StoreName = ko.observable(data.storeName);
+        this.BaseUrl = ko.observable(data.baseurl);
+        this.Image = ko.observable(data.image);
+
+        this.IsActive = ko.observable(data.active);
+        this.Owner = ko.observable(data.owner);
+        this.EmailAddress = ko.observable(data.email);
     }
 
     function TaskListViewModel() {
         // Data
         var self = this;
         self.addresses = ko.observableArray([]);
+        self.store = ko.observableArray([]);
         //Address Fields
         self.newAddressText = ko.observable();
         self.newCityText = ko.observable();
@@ -159,13 +190,13 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
         self.newBaseUrlText = ko.observable();
         self.newImageText = ko.observable();
 
-        
+
         self.newIsActiveText = ko.observable();
         self.newOwnerText = ko.observable();
         self.newEmailText = ko.observable();
         // Operations
         self.addStoreAddress = function () {
-            self.addresses.push(new Store(
+            self.addresses.push(new StoreAddress(
                 {
                     address: this.newAddressText(),
                     city: this.newCityText(),
@@ -176,24 +207,41 @@ You currently have <b data-bind="text: addresses().length">&nbsp;</b> locations
                     storeName: this.newStoreNameText(),
                     baseurl: this.newBaseUrlText(),
                     image: this.newImageText(),
-                    
+
                     active: this.newIsActiveText(),
                     owner: this.newOwnerText(),
                     email: this.newEmailText()
                 }));
-            self.newAddressText("");
+        };
+        self.createStore = function () {
+            $(this).attr('disabled', 'disabled');
+            self.store.push(new Store(
+                {
+                    storeName: this.newStoreNameText(),
+                    baseurl: this.newBaseUrlText(),
+                    image: this.newImageText(),
+                    active: this.newIsActiveText(),
+                    owner: this.newOwnerText(),
+                    email: this.newEmailText()
+                }));
+            debugger;
+            $.ajax("/Admin/Knockout/CreateStore", {
+                data: ko.toJSON({ model: self.store._latestValue[0] }),
+                type: "post",
+                contentType: "application/json",
+                success: function (result) {
+                    $.pnotify({
+                        title: result,
+                        text: '',
+                        type: 'success',
+                    });
+                    debugger;
+                    $('#mywizard').wizard('next','step2');
+                }
+            });
         };
         self.removeTask = function (addresses) { self.addresses.remove(addresses); };
     }
 
     ko.applyBindings(new TaskListViewModel());
 </script>
-@*public int Id { get; set; }
-        public string StoreName { get; set; }
-        public string BaseUrl { get; set; }
-        public string LogOutUrl { get; set; }
-        public string Image { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsGlobal { get; set; }
-        public string Owner { get; set; }
-        public string EmailAddress { get; set; }*@
