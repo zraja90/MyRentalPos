@@ -77,7 +77,7 @@
     </div>
     <div class="step-pane" id="step2">Step 2</div>
 </div>
-You currently have <b data-bind="text: store().length">&nbsp;</b> locations
+
 
 <textarea name="tasks" data-bind="value: ko.toJSON(store)"></textarea>
 <div class="hide">
@@ -154,7 +154,7 @@ You currently have <b data-bind="text: store().length">&nbsp;</b> locations
 
     </div>
 <script>
-  
+    
     function StoreAddress(data) {
         this.address = ko.observable(data.address);
         this.city = ko.observable(data.city);
@@ -224,18 +224,18 @@ You currently have <b data-bind="text: store().length">&nbsp;</b> locations
                     owner: this.newOwnerText(),
                     email: this.newEmailText()
                 }));
-            debugger;
+            //debugger;
             $.ajax("/Admin/Knockout/CreateStore", {
                 data: ko.toJSON({ model: self.store._latestValue[0] }),
                 type: "post",
                 contentType: "application/json",
                 success: function (result) {
-                    $.pnotify({
-                        title: result,
-                        text: '',
-                        type: 'success',
-                    });
-                    debugger;
+                    //$.pnotify({
+                    //    title: result,
+                    //    text: '',
+                    //    type: 'success',
+                    //});
+                    ////debugger;
                     $('#mywizard').wizard('next','step2');
                 }
             });

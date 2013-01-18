@@ -20,7 +20,7 @@ namespace MyRentalPos.Areas.Admin.Controllers
         //
         // GET: /Admin/Knockout/Details/5
 
-        public ActionResult Details(int id)
+        public ActionResult Details()
         {
             return View();
         }

@@ -222,12 +222,12 @@ var requirejs, require, define;
 
     function newContext(contextName) {
         var config = {
-                waitSeconds: 7,
-                baseUrl: './',
-                paths: {},
-                pkgs: {},
-                shim: {}
-            },
+            waitSeconds: 7,
+            baseUrl: './',
+            paths: {},
+            pkgs: {},
+            shim: {}
+        },
             registry = {},
             undefEvents = {},
             defQueue = [],
@@ -254,7 +254,7 @@ var requirejs, require, define;
          */
         function trimDots(ary) {
             var i, part;
-            for (i = 0; ary[i]; i+= 1) {
+            for (i = 0; ary[i]; i += 1) {
                 part = ary[i];
                 if (part === '.') {
                     ary.splice(i, 1);
@@ -668,7 +668,7 @@ var requirejs, require, define;
 
             traced[id] = mod;
 
-            each(depArray, function(depMap) {
+            each(depArray, function (depMap) {
                 var depId = depMap.id,
                     depMod = registry[depId],
                     value;
@@ -828,7 +828,7 @@ var requirejs, require, define;
         };
 
         Module.prototype = {
-            init: function(depMaps, factory, errback, options) {
+            init: function (depMaps, factory, errback, options) {
                 options = options || {};
 
                 //Do not do more inits if already done. Can happen if there
@@ -925,7 +925,7 @@ var requirejs, require, define;
                 }
             },
 
-            load: function() {
+            load: function () {
                 var url = this.map.url;
 
                 //Regular dependency.
@@ -1041,7 +1041,7 @@ var requirejs, require, define;
                 }
             },
 
-            callPlugin: function() {
+            callPlugin: function () {
                 var map = this.map,
                     id = map.id,
                     pluginMap = makeModuleMap(map.prefix, null, false, true);
@@ -1067,11 +1067,11 @@ var requirejs, require, define;
                                                       true);
                         on(normalizedMap,
                            'defined', bind(this, function (value) {
-                            this.init([], function () { return value; }, null, {
-                                enabled: true,
-                                ignore: true
-                            });
-                        }));
+                               this.init([], function () { return value; }, null, {
+                                   enabled: true,
+                                   ignore: true
+                               });
+                           }));
                         normalizedMod = registry[normalizedMap.id];
                         if (normalizedMod) {
                             if (this.events.error) {
@@ -1218,7 +1218,7 @@ var requirejs, require, define;
                 this.check();
             },
 
-            on: function(name, cb) {
+            on: function (name, cb) {
                 var cbs = this.events[name];
                 if (!cbs) {
                     cbs = this.events[name] = [];
@@ -1929,7 +1929,7 @@ var requirejs, require, define;
                 //baseUrl.
                 src = dataMain.split('/');
                 mainScript = src.pop();
-                subPath = src.length ? src.join('/')  + '/' : './';
+                subPath = src.length ? src.join('/') + '/' : './';
 
                 //Set final baseUrl if there is not already an explicit one.
                 if (!cfg.baseUrl) {
