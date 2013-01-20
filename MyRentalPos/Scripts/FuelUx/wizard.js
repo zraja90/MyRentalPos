@@ -6,9 +6,7 @@
  * Licensed under the MIT license.
  */
 
-define(function (require) {
 
-	var $ = require('jquery');
 
 
 	// WIZARD CONSTRUCTOR AND PROTOTYPE
@@ -158,4 +156,4 @@ define(function (require) {
 		});
 	});
 
-});
+

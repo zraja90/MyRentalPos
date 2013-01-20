@@ -4,13 +4,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyRentalPos.Areas.Admin.Models.Store;
+using MyRentalPos.Mappers;
+using MyRentalPos.Services.Stores;
 
 namespace MyRentalPos.Areas.Admin.Controllers
 {
     public class KnockoutController : Controller
     {
+        private readonly IStoreService _storeService;
+        public KnockoutController(IStoreService storeService)
+        {
+            _storeService = storeService;
+        }
         //
         // GET: /Admin/Knockout/
+        
 
         public ActionResult Index()
         {
@@ -24,13 +32,15 @@ namespace MyRentalPos.Areas.Admin.Controllers
         {
             return View();
         }
-
+        [HttpPost]
         public JsonResult CreateStore(StoreModel model)
         {
             var success = "";
             try
             {
-              
+                model.LogOutUrl = model.BaseUrl;
+                var entity = model.ToEntity();
+                _storeService.Add(entity);
                 success = "Brochure Updated";
             }
             catch (Exception)

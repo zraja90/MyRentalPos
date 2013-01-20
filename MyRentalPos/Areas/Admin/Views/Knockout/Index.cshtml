@@ -2,10 +2,10 @@
     ViewBag.Title = "Index";
 }
 <script src="/Scripts/jquery.pnotify.js"></script>
-<script src="/Scripts/FuelUx/require.js"></script>
+
 <script src="/Scripts/FuelUx/wizard.js"></script>
-<link rel="stylesheet"  href="/Content/jquery.pnotify.default.css"/>
-<link rel="stylesheet" href="/Content/jquery.pnotify.default.icons.css"/>
+<link rel="stylesheet" href="/Content/jquery.pnotify.default.css" />
+<link rel="stylesheet" href="/Content/jquery.pnotify.default.icons.css" />
 <h3>Create Your Store</h3>
 <div class="wizard" id="mywizard">
     <ul class="steps">
@@ -21,13 +21,13 @@
 </div>
 <div class="step-content">
     <div class="step-pane active" id="step1">
-        <form data-bind="submit: createStore" class="form-horizontal">
+        <form data-bind="submit: createStore" id="createStoreForm" class="form-horizontal">
             <div class="control-group">
                 <label class="control-label">
                     Store Name
                 </label>
                 <div class="controls">
-                    <input type="text" data-bind="value: newStoreNameText" placeholder="Store Name" required="required" />
+                    <input type="text" data-bind="value: newStoreNameText" id="storeName" placeholder="Store Name" required="required" />
                 </div>
             </div>
             <div class="control-group">
@@ -79,169 +79,178 @@
 </div>
 
 
-<textarea name="tasks" data-bind="value: ko.toJSON(store)"></textarea>
+@*<textarea name="tasks" data-bind="value: ko.toJSON(store)"></textarea>*@
 <div class="hide">
-<form data-bind="submit: addStoreAddress" class="form-horizontal">
+    <form data-bind="submit: addStoreAddress" class="form-horizontal">
 
-    <div class="control-group">
-        <label class="control-label">
-            Address
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newAddressText" placeholder="Street Address" required="required" />
+        <div class="control-group">
+            <label class="control-label">
+                Address
+            </label>
+            <div class="controls">
+                <input type="text" data-bind="value: newAddressText" placeholder="Street Address" required="required" />
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">
-            City
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newCityText" placeholder="Add City" />
+        <div class="control-group">
+            <label class="control-label">
+                City
+            </label>
+            <div class="controls">
+                <input type="text" data-bind="value: newCityText" placeholder="Add City" />
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">
-            State
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newStateText" placeholder="Add State" />
+        <div class="control-group">
+            <label class="control-label">
+                State
+            </label>
+            <div class="controls">
+                <input type="text" data-bind="value: newStateText" placeholder="Add State" />
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">
-            Zip Code
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newZipCodeText" placeholder="Add Zip Code" />
+        <div class="control-group">
+            <label class="control-label">
+                Zip Code
+            </label>
+            <div class="controls">
+                <input type="text" data-bind="value: newZipCodeText" placeholder="Add Zip Code" />
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">
-            Phone Number
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newPhoneNumberText" placeholder="Add Phone Number" />
+        <div class="control-group">
+            <label class="control-label">
+                Phone Number
+            </label>
+            <div class="controls">
+                <input type="text" data-bind="value: newPhoneNumberText" placeholder="Add Phone Number" />
+            </div>
         </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">
-            Fax Number
-        </label>
-        <div class="controls">
-            <input type="text" data-bind="value: newFaxNumberText" placeholder="Add Fax Number" />
+        <div class="control-group">
+            <label class="control-label">
+                Fax Number
+            </label>
+            <div class="controls">
+                <input type="text" data-bind="value: newFaxNumberText" placeholder="Add Fax Number" />
+            </div>
         </div>
-    </div>
-    <button type="submit" class="btn">Add Location</button>
-</form>
-<ul class="unstyled" data-bind="foreach: addresses, visible: addresses().length > 0">
-    <li>
-        <input data-bind="value: address" /></li>
-    <li>
-        <input data-bind="value: city" /></li>
-    <li>
-        <input data-bind="value: state" /></li>
-    <li>
-        <input data-bind="value: zipcode" /></li>
-    <li>
-        <input data-bind="value: phonenumber" /></li>
-    <li>
-        <input data-bind="value: faxnumber" /></li>
-    <li>
-        <a href="#" data-bind="click: $parent.removeTask">Delete</a>
-    </li>
-</ul>
-    
+        <button type="submit" class="btn">Add Location</button>
+    </form>
+    <ul class="unstyled" data-bind="foreach: addresses, visible: addresses().length > 0">
+        <li>
+            <input data-bind="value: address" /></li>
+        <li>
+            <input data-bind="value: city" /></li>
+        <li>
+            <input data-bind="value: state" /></li>
+        <li>
+            <input data-bind="value: zipcode" /></li>
+        <li>
+            <input data-bind="value: phonenumber" /></li>
+        <li>
+            <input data-bind="value: faxnumber" /></li>
+        <li>
+            <a href="#" data-bind="click: $parent.removeTask">Delete</a>
+        </li>
+    </ul>
 
-    </div>
+
+</div>
 <script>
-    
-    function StoreAddress(data) {
-        this.address = ko.observable(data.address);
-        this.city = ko.observable(data.city);
-        this.state = ko.observable(data.state);
-        this.zipcode = ko.observable(data.zipcode);
-        this.phonenumber = ko.observable(data.phonenumber);
-        this.faxnumber = ko.observable(data.faxnumber);
-    }
-    function Store(data) {
-        this.StoreName = ko.observable(data.storeName);
-        this.BaseUrl = ko.observable(data.baseurl);
-        this.Image = ko.observable(data.image);
+    $(function () {
 
-        this.IsActive = ko.observable(data.active);
-        this.Owner = ko.observable(data.owner);
-        this.EmailAddress = ko.observable(data.email);
-    }
+        function storeAddress(data) {
+            this.address = ko.observable(data.address);
+            this.city = ko.observable(data.city);
+            this.state = ko.observable(data.state);
+            this.zipcode = ko.observable(data.zipcode);
+            this.phonenumber = ko.observable(data.phonenumber);
+            this.faxnumber = ko.observable(data.faxnumber);
+        }
+        function storeData(data) {
+            this.StoreName = ko.observable(data.storeName);
+            this.BaseUrl = ko.observable(data.baseurl);
+            this.Image = ko.observable(data.image);
 
-    function TaskListViewModel() {
-        // Data
-        var self = this;
-        self.addresses = ko.observableArray([]);
-        self.store = ko.observableArray([]);
-        //Address Fields
-        self.newAddressText = ko.observable();
-        self.newCityText = ko.observable();
-        self.newStateText = ko.observable();
-        self.newZipCodeText = ko.observable();
-        self.newPhoneNumberText = ko.observable();
-        self.newFaxNumberText = ko.observable();
-        //Store Fields
-        self.newStoreNameText = ko.observable();
-        self.newBaseUrlText = ko.observable();
-        self.newImageText = ko.observable();
+            this.IsActive = ko.observable(data.active);
+            this.Owner = ko.observable(data.owner);
+            this.EmailAddress = ko.observable(data.email);
+        }
+
+        function storeViewModel() {
+            // Data
+            var self = this;
+            self.addresses = ko.observableArray([]);
+            self.store = ko.observableArray([]);
+            //Address Fields
+            self.newAddressText = ko.observable();
+            self.newCityText = ko.observable();
+            self.newStateText = ko.observable();
+            self.newZipCodeText = ko.observable();
+            self.newPhoneNumberText = ko.observable();
+            self.newFaxNumberText = ko.observable();
+            //Store Fields
+            self.newStoreNameText = ko.observable();
+            self.newBaseUrlText = ko.observable();
+            self.newImageText = ko.observable();
 
 
-        self.newIsActiveText = ko.observable();
-        self.newOwnerText = ko.observable();
-        self.newEmailText = ko.observable();
-        // Operations
-        self.addStoreAddress = function () {
-            self.addresses.push(new StoreAddress(
-                {
-                    address: this.newAddressText(),
-                    city: this.newCityText(),
-                    state: this.newStateText(),
-                    zipcode: this.newZipCodeText(),
-                    phonenumber: this.newPhoneNumberText(),
-                    faxnumber: this.newFaxNumberText(),
-                    storeName: this.newStoreNameText(),
-                    baseurl: this.newBaseUrlText(),
-                    image: this.newImageText(),
+            self.newIsActiveText = ko.observable();
+            self.newOwnerText = ko.observable();
+            self.newEmailText = ko.observable();
+            // Operations
+            self.addStoreAddress = function () {
+                self.addresses.push(new storeAddress(
+                    {
+                        address: this.newAddressText(),
+                        city: this.newCityText(),
+                        state: this.newStateText(),
+                        zipcode: this.newZipCodeText(),
+                        phonenumber: this.newPhoneNumberText(),
+                        faxnumber: this.newFaxNumberText(),
+                        storeName: this.newStoreNameText(),
+                        baseurl: this.newBaseUrlText(),
+                        image: this.newImageText(),
 
-                    active: this.newIsActiveText(),
-                    owner: this.newOwnerText(),
-                    email: this.newEmailText()
-                }));
-        };
-        self.createStore = function () {
-            $(this).attr('disabled', 'disabled');
-            self.store.push(new Store(
-                {
-                    storeName: this.newStoreNameText(),
-                    baseurl: this.newBaseUrlText(),
-                    image: this.newImageText(),
-                    active: this.newIsActiveText(),
-                    owner: this.newOwnerText(),
-                    email: this.newEmailText()
-                }));
-            //debugger;
-            $.ajax("/Admin/Knockout/CreateStore", {
-                data: ko.toJSON({ model: self.store._latestValue[0] }),
-                type: "post",
-                contentType: "application/json",
-                success: function (result) {
-                    //$.pnotify({
-                    //    title: result,
-                    //    text: '',
-                    //    type: 'success',
-                    //});
-                    ////debugger;
-                    $('#mywizard').wizard('next','step2');
+                        active: this.newIsActiveText(),
+                        owner: this.newOwnerText(),
+                        email: this.newEmailText()
+                    }));
+            };
+            self.createStore = function () {
+                console.log($('#createStoreForm').serialize());
+                if ($("#createStoreForm").valid()) {
+                    self.store.push(
+                        new storeData(
+                            {
+                                storeName: this.newStoreNameText(),
+                                baseurl: this.newBaseUrlText(),
+                                image: this.newImageText(),
+                                active: this.newIsActiveText(),
+                                owner: this.newOwnerText(),
+                                email: this.newEmailText()
+                            }));
+                    $.ajax("/Admin/Knockout/CreateStore", {
+                        data: ko.toJSON({ model: self.store._latestValue[0] }),
+                        type: "post",
+                        contentType: "application/json",
+                        success: function(result) {
+                            $.pnotify({
+                                title: result,
+                                text: '',
+                                type: 'success',
+                            });
+                            $('#mywizard').wizard('next');
+                            $('#mywizard .steps li').each(function () {
+                                if ($(this).attr('class')=='completed') {
+                                    $(this).attr('data-target', '');
+                                }
+                                
+                            });
+                        }
+                    });
                 }
-            });
-        };
-        self.removeTask = function (addresses) { self.addresses.remove(addresses); };
-    }
 
-    ko.applyBindings(new TaskListViewModel());
+            };
+            self.removeTask = function (addresses) { self.addresses.remove(addresses); };
+        };
+        ko.applyBindings(new storeViewModel());
+    });
 </script>
