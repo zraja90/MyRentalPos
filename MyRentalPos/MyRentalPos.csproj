@@ -494,6 +494,7 @@
     <Content Include="Areas\Admin\Views\Store\LeftMenu.cshtml" />
     <Content Include="Areas\Admin\Views\Knockout\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Knockout\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Store\CreateStore.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="robots.txt" />
     <Content Include="Scripts\bootstrap.js" />
@@ -533,6 +534,8 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
     <Content Include="Scripts\knockout.mapping-latest.js" />
+    <Content Include="Scripts\knockout.validation.debug.js" />
+    <Content Include="Scripts\knockout.validation.js" />
     <Content Include="Scripts\less.min.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Web.config" />
