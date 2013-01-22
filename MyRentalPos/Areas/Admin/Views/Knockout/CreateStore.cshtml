@@ -116,14 +116,19 @@
                          email: this.newEmailText()
                      }));*/
             debugger;
-            if (StoreViewModel.isValid()) {
-                if (StoreViewModel.errors().length == 0) {
+            $('createStoreForm').validate({
+                submitHandler: function(form) {
                     alert('thank you');
-                } else {
-                    alert('error');
-                    StoreViewModel.errors.showAllMessages();
                 }
-            }
+            });
+            //if (StoreViewModel.isValid()) {
+            //    if (StoreViewModel.errors().length == 0) {
+                    
+            //    } else {
+            //        alert('error');
+            //        StoreViewModel.errors.showAllMessages();
+            //    }
+            //}
             /* $.ajax("/Admin/Knockout/CreateStore", {
                 data: ko.toJSON({ model: self.store._latestValue[0] }),
                 type: "post",
