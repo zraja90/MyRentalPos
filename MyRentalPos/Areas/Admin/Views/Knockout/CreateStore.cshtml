@@ -43,7 +43,7 @@
     <div class="control-group">
         <div class="controls">
             <label class="checkbox">
-                <input type="checkbox" data-bind="checked: newIsActiveText" />
+                <input type="checkbox" data-bind="checked: newIsActiveText" name="newIsActiveText" />
                 Is Active? 
             </label>
             <button type="submit" id="wizard-next" class="btn btn-primary">Create</button>
@@ -57,15 +57,24 @@
     $('#createStoreForm').validate({
         rules: {
             newStoreNameText: { required: true },
+            newBaseUrlText: { required: true },
             newImageText: { required: true },
-            comment: "required"
+            newOwnerText: { required: true },
+            newEmailText: { required: true }
+
         },
         messages: {
-            newStoreNameText: "This is required",
-            newImageText: "Image required"
-        }
+            newStoreNameText: "Store Name is required",
+            newBaseUrlText: "Store Url is required",
+            newImageText: "Store logo is required",
+            newOwnerText: "Owner name is required",
+            newEmailText: "Please enter a valid email address"
+        },
+        errorElement: "span",
+        
     });
     function StoreData(data) {
+        debugger;
         this.StoreName = ko.observable(data.storeName);
         this.BaseUrl = ko.observable(data.baseurl);
         this.Image = ko.observable(data.image);
@@ -74,27 +83,6 @@
         this.Owner = ko.observable(data.owner);
         this.EmailAddress = ko.observable(data.email);
     }
-
-    //ko.extenders.required = function (target, overrideMessage) {
-    //    //add some sub-observables to our observable
-    //    target.hasError = ko.observable();
-    //    target.validationMessage = ko.observable();
-
-    //    //define a function to do validation
-    //    function validate(newValue) {
-    //        target.hasError(newValue ? false : true);
-    //        target.validationMessage(newValue ? "" : overrideMessage || "This fields is required");
-    //    }
-
-    //    //initial validation
-    //    validate(target());
-
-    //    //validate whenever the value changes
-    //    target.subscribe(validate);
-
-    //    //return the original observable
-    //    return target;
-    //};
 
     function StoreViewModel() {
         // Data
@@ -111,61 +99,40 @@
         // Operations
 
         self.createStore = function () {
-            $('#createStoreForm').validate();
-            //console.log($('#createStoreForm').serialize());
-            //if ($("#createStoreForm").valid()) {
-
-            /* self.store.push(
-                 new StoreData(
-                     {
-                         storeName: this.newStoreNameText(),
-                         baseurl: this.newBaseUrlText(),
-                         image: this.newImageText(),
-                         active: this.newIsActiveText(),
-                         owner: this.newOwnerText(),
-                         email: this.newEmailText()
-                     }));*/
-            debugger;
 
             if ($("#createStoreForm").valid()) {
-                alert('true');
-            } else {
-                alert('false');
-                $('#createStoreForm').showErrors();
-            }
+                self.store.push(
+                    new StoreData(
+                        {
+                            storeName: this.newStoreNameText(),
+                            baseurl: this.newBaseUrlText(),
+                            image: this.newImageText(),
+                            active: this.newIsActiveText(),
+                            owner: this.newOwnerText(),
+                            email: this.newEmailText()
+                        }));
+                $.ajax("/Admin/Knockout/CreateStore", {
+                    
+                    data: ko.toJSON({ model: self.store._latestValue[0] }),
+                    type: "post",
+                    contentType: "application/json",
+                    success: function (result) {
+                        $.pnotify({
+                            title: result,
+                            text: '',
+                            type: 'success',
+                        });
+                        $('#mywizard').wizard('next');
+                        $('#mywizard .steps li').each(function () {
+                            if ($(this).attr('class') == 'completed') {
+                                $(this).attr('data-target', '');
+                            }
 
-
-            //if (StoreViewModel.isValid()) {
-            //    if (StoreViewModel.errors().length == 0) {
-
-            //    } else {
-            //        alert('error');
-            //        StoreViewModel.errors.showAllMessages();
-            //    }
-            //}
-            /* $.ajax("/Admin/Knockout/CreateStore", {
-                data: ko.toJSON({ model: self.store._latestValue[0] }),
-                type: "post",
-                contentType: "application/json",
-                success: function (result) {
-                    $.pnotify({
-                        title: result,
-                        text: '',
-                        type: 'success',
-                    });
-                    $('#mywizard').wizard('next');
-                    $('#mywizard .steps li').each(function () {
-                        if ($(this).attr('class') == 'completed') {
-                            $(this).attr('data-target', '');
-                        }
-
-                    });
-                }
-            });*/
+                        });
+                    }
+                });
+            };
         };
-
-        //};
-
     };
     ko.applyBindings(new StoreViewModel());
 

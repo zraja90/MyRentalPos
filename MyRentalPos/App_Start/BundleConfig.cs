@@ -46,7 +46,7 @@ namespace MyRentalPos.App_Start
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include("~/Scripts/bootstrap.js"));
             
-            var less = new StyleBundle("~/Content/less").Include("~/Content/site.less", "~/Content/bootstrap/bootstrap.less",
+            var less = new StyleBundle("~/Content/less").Include("~/Content/css/site.less", "~/Content/bootstrap/bootstrap.less",
                 "~/Content/css/alignment.less");
 
             less.Transforms.Add(new LessMinify());

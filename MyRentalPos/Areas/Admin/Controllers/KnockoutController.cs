@@ -33,7 +33,7 @@ namespace MyRentalPos.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult CreateStoreJson(StoreModel model)
+        public JsonResult CreateStore(StoreModel model)
         {
             var success = "";
             try
