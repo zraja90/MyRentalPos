@@ -1,11 +1,11 @@
-﻿<form data-bind="submit: createStore" id="createStoreForm" class="form-horizontal">
+﻿@model MyRentalPos.Areas.Admin.Models.Store.CreateStoreModel
+<form data-bind="submit: createStore" id="createStoreForm" class="form-horizontal">
     <div class="control-group">
         <label class="control-label">
             Store Name
         </label>
         <div class="controls">
             <input type="text" data-bind="value: newStoreNameText" id="newStoreNameText" name="newStoreNameText" placeholder="Store Name" />
-
         </div>
     </div>
     <div class="control-group">
@@ -46,14 +46,14 @@
                 <input type="checkbox" data-bind="checked: newIsActiveText" name="newIsActiveText" />
                 Is Active? 
             </label>
-            <button type="submit" id="wizard-next" class="btn btn-primary">Create</button>
+            <button type="submit" id="createStoreButton" class="btn btn-primary">Create</button>
+            <button type="button" id="btnWizardNext" class="hide btn btn-primary">Next Step</button>
         </div>
     </div>
 
 </form>
 
 <script>
-    //http://docs.jquery.com/Plugins/Validation
     $('#createStoreForm').validate({
         rules: {
             newStoreNameText: { required: true },
@@ -84,12 +84,15 @@
         this.EmailAddress = ko.observable(data.email);
     }
 
-    function StoreViewModel() {
+    var initialdata = @Html.Raw(Model.JsonModel);
+    debugger;
+    function StoreViewModel(data) {
         // Data
         var self = this;
         self.store = ko.observableArray([]);
         self.newFaxNumberText = ko.observable();
         //Store Fields
+        
         self.newStoreNameText = ko.observable();
         self.newBaseUrlText = ko.observable();
         self.newImageText = ko.observable();
@@ -111,8 +114,15 @@
                             owner: this.newOwnerText(),
                             email: this.newEmailText()
                         }));
-                $.ajax("/Admin/Knockout/CreateStore", {
-                    
+                $('#mywizard').wizard('next');
+                debugger;
+                $('#mywizard .steps li').each(function() {
+                    debugger;
+                    if ($(this).attr('class') == 'complete') {
+                        $(this).attr('data-target', '');
+                    }
+                });
+                /*$.ajax("/Admin/Knockout/CreateStore", {
                     data: ko.toJSON({ model: self.store._latestValue[0] }),
                     type: "post",
                     contentType: "application/json",
@@ -124,16 +134,16 @@
                         });
                         $('#mywizard').wizard('next');
                         $('#mywizard .steps li').each(function () {
-                            if ($(this).attr('class') == 'completed') {
+                            if ($(this).attr('class') == 'complete') {
                                 $(this).attr('data-target', '');
                             }
 
                         });
                     }
-                });
+                });*/
             };
         };
     };
-    ko.applyBindings(new StoreViewModel());
+    ko.applyBindings(new StoreViewModel(initialdata));
 
 </script>

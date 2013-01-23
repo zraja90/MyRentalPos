@@ -1,4 +1,5 @@
-﻿@*<form data-bind="submit: addStoreAddress" class="form-horizontal">
+﻿@model MyRentalPos.Areas.Admin.Models.Store.CreateStoreModel
+<form data-bind="submit: addStoreAddress" class="form-horizontal">
 
     <div class="control-group">
         <label class="control-label">
@@ -6,6 +7,7 @@
         </label>
         <div class="controls">
             <input type="text" data-bind="value: newAddressText" placeholder="Street Address" required="required" />
+            <input type="hidden" value="" id=""/>
         </div>
     </div>
     <div class="control-group">
@@ -112,4 +114,4 @@
                 }));
         };
     }
-</script>*@
+</script>

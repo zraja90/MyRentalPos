@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MyRentalPos.Areas.Admin.Models.Store.CreateStoreModel
+@{
     ViewBag.Title = "Index";
 }
 <script src="/Scripts/jquery.pnotify.js"></script>
@@ -7,26 +8,34 @@
 <link rel="stylesheet" href="/Content/jquery.pnotify.default.css" />
 <link rel="stylesheet" href="/Content/jquery.pnotify.default.icons.css" />
 <script src="/Scripts/knockout.validation.js"></script>
-<h3>Create Your Store</h3>
+<h3>Create Your Program</h3>
 <div class="wizard" id="mywizard">
     <ul class="steps">
         <li data-target="#step1" class="active">
-            <span class="badge badge-info">1</span>Step 1
+            Create Store
             <span class="chevron"></span>
         </li>
         <li data-target="#step2">
-            <span class="badge badge-info">2</span>Step 2
+            Add Address
+            <span class="chevron"></span>
+        </li>
+        <li data-target="#step3">
+            Add Employees
+            <span class="chevron"></span>
+        </li>
+        <li data-target="#step4">
+            Employee Permission
             <span class="chevron"></span>
         </li>
     </ul>
 </div>
 <div class="step-content">
     <div class="step-pane active" id="step1">
-        @Html.Partial("CreateStore")
+        @Html.Partial("CreateStore", Model)
 
     </div>
     <div class="step-pane" id="step2">
-        @Html.Partial("CreateStoreAddress")
+        @Html.Partial("CreateStoreAddress",Model)
     </div>
 </div>
 

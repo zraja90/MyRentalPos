@@ -4,8 +4,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MyRentalPos.Areas.Admin.Models.Store;
+using MyRentalPos.Core.Domain.Stores;
 using MyRentalPos.Mappers;
 using MyRentalPos.Services.Stores;
+using Newtonsoft.Json;
 
 namespace MyRentalPos.Areas.Admin.Controllers
 {
@@ -22,7 +24,13 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var model = new CreateStoreModel
+                            {
+                                StoreAddress = new List<StoreAddress>(),
+                                Store = new Store()
+                            };
+            model.JsonModel = JsonConvert.SerializeObject(model);
+            return View(model);
         }
 
         //
@@ -49,6 +57,12 @@ namespace MyRentalPos.Areas.Admin.Controllers
             }
 
             return Json(success);
+        }
+
+        [HttpPost]
+        public JsonResult CreateStoreAddress()
+        {
+            return Json(new { success = "" });
         }
 
         //
