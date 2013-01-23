@@ -4,7 +4,7 @@
             Store Name
         </label>
         <div class="controls">
-            <input type="text" data-bind="value: newStoreNameText" id="newStoreNameText" name="newStoreNameText" placeholder="Store Name" required="" />
+            <input type="text" data-bind="value: newStoreNameText" id="newStoreNameText" name="newStoreNameText" placeholder="Store Name" />
 
         </div>
     </div>
@@ -13,7 +13,7 @@
             Store URL
         </label>
         <div class="controls">
-            <input type="text" data-bind="value: newBaseUrlText" placeholder="Store URL" required="" />
+            <input type="text" data-bind="value: newBaseUrlText" name="newBaseUrlText" placeholder="Store URL" />
         </div>
     </div>
     <div class="control-group">
@@ -21,7 +21,7 @@
             Store Logo
         </label>
         <div class="controls">
-            <input type="text" data-bind="value: newImageText" placeholder="Store Logo" required="" />
+            <input type="text" data-bind="value: newImageText" name="newImageText" placeholder="Store Logo" />
         </div>
     </div>
     <div class="control-group">
@@ -29,7 +29,7 @@
             Store Owner
         </label>
         <div class="controls">
-            <input type="text" data-bind="value: newOwnerText" placeholder="Store Owner" required="" />
+            <input type="text" data-bind="value: newOwnerText" name="newOwnerText" placeholder="Store Owner" />
         </div>
     </div>
     <div class="control-group">
@@ -37,7 +37,7 @@
             Owner Email Address
         </label>
         <div class="controls">
-            <input type="email" data-bind="value: newEmailText" placeholder="Store Email Address" required="" />
+            <input type="email" data-bind="value: newEmailText" name="newEmailText" placeholder="Store Email Address" />
         </div>
     </div>
     <div class="control-group">
@@ -53,113 +53,120 @@
 </form>
 
 <script>
-    $(function () {
-        $('#createStoreForm').validate();
-
-        //http://docs.jquery.com/Plugins/Validation
-        $('#createStoreForm').validate();
-        function StoreData(data) {
-            this.StoreName = ko.observable(data.storeName);
-            this.BaseUrl = ko.observable(data.baseurl);
-            this.Image = ko.observable(data.image);
-
-            this.IsActive = ko.observable(data.active);
-            this.Owner = ko.observable(data.owner);
-            this.EmailAddress = ko.observable(data.email);
+    //http://docs.jquery.com/Plugins/Validation
+    $('#createStoreForm').validate({
+        rules: {
+            newStoreNameText: { required: true },
+            newImageText: { required: true },
+            comment: "required"
+        },
+        messages: {
+            newStoreNameText: "This is required",
+            newImageText: "Image required"
         }
+    });
+    function StoreData(data) {
+        this.StoreName = ko.observable(data.storeName);
+        this.BaseUrl = ko.observable(data.baseurl);
+        this.Image = ko.observable(data.image);
 
-        //ko.extenders.required = function (target, overrideMessage) {
-        //    //add some sub-observables to our observable
-        //    target.hasError = ko.observable();
-        //    target.validationMessage = ko.observable();
+        this.IsActive = ko.observable(data.active);
+        this.Owner = ko.observable(data.owner);
+        this.EmailAddress = ko.observable(data.email);
+    }
 
-        //    //define a function to do validation
-        //    function validate(newValue) {
-        //        target.hasError(newValue ? false : true);
-        //        target.validationMessage(newValue ? "" : overrideMessage || "This fields is required");
-        //    }
+    //ko.extenders.required = function (target, overrideMessage) {
+    //    //add some sub-observables to our observable
+    //    target.hasError = ko.observable();
+    //    target.validationMessage = ko.observable();
 
-        //    //initial validation
-        //    validate(target());
+    //    //define a function to do validation
+    //    function validate(newValue) {
+    //        target.hasError(newValue ? false : true);
+    //        target.validationMessage(newValue ? "" : overrideMessage || "This fields is required");
+    //    }
 
-        //    //validate whenever the value changes
-        //    target.subscribe(validate);
+    //    //initial validation
+    //    validate(target());
 
-        //    //return the original observable
-        //    return target;
+    //    //validate whenever the value changes
+    //    target.subscribe(validate);
+
+    //    //return the original observable
+    //    return target;
+    //};
+
+    function StoreViewModel() {
+        // Data
+        var self = this;
+        self.store = ko.observableArray([]);
+        self.newFaxNumberText = ko.observable();
+        //Store Fields
+        self.newStoreNameText = ko.observable();
+        self.newBaseUrlText = ko.observable();
+        self.newImageText = ko.observable();
+        self.newIsActiveText = ko.observable();
+        self.newOwnerText = ko.observable();
+        self.newEmailText = ko.observable();
+        // Operations
+
+        self.createStore = function () {
+            $('#createStoreForm').validate();
+            //console.log($('#createStoreForm').serialize());
+            //if ($("#createStoreForm").valid()) {
+
+            /* self.store.push(
+                 new StoreData(
+                     {
+                         storeName: this.newStoreNameText(),
+                         baseurl: this.newBaseUrlText(),
+                         image: this.newImageText(),
+                         active: this.newIsActiveText(),
+                         owner: this.newOwnerText(),
+                         email: this.newEmailText()
+                     }));*/
+            debugger;
+
+            if ($("#createStoreForm").valid()) {
+                alert('true');
+            } else {
+                alert('false');
+                $('#createStoreForm').showErrors();
+            }
+
+
+            //if (StoreViewModel.isValid()) {
+            //    if (StoreViewModel.errors().length == 0) {
+
+            //    } else {
+            //        alert('error');
+            //        StoreViewModel.errors.showAllMessages();
+            //    }
+            //}
+            /* $.ajax("/Admin/Knockout/CreateStore", {
+                data: ko.toJSON({ model: self.store._latestValue[0] }),
+                type: "post",
+                contentType: "application/json",
+                success: function (result) {
+                    $.pnotify({
+                        title: result,
+                        text: '',
+                        type: 'success',
+                    });
+                    $('#mywizard').wizard('next');
+                    $('#mywizard .steps li').each(function () {
+                        if ($(this).attr('class') == 'completed') {
+                            $(this).attr('data-target', '');
+                        }
+
+                    });
+                }
+            });*/
+        };
+
         //};
 
-        function StoreViewModel() {
-            // Data
-            var self = this;
-            self.store = ko.observableArray([]);
-            self.newFaxNumberText = ko.observable();
-            //Store Fields
-            self.newStoreNameText = ko.observable();
-            self.newBaseUrlText = ko.observable();
-            self.newImageText = ko.observable();
-            self.newIsActiveText = ko.observable();
-            self.newOwnerText = ko.observable();
-            self.newEmailText = ko.observable();
-            // Operations
+    };
+    ko.applyBindings(new StoreViewModel());
 
-            self.createStore = function () {
-                $('#createStoreForm').validate();
-                //console.log($('#createStoreForm').serialize());
-                //if ($("#createStoreForm").valid()) {
-
-                /* self.store.push(
-                     new StoreData(
-                         {
-                             storeName: this.newStoreNameText(),
-                             baseurl: this.newBaseUrlText(),
-                             image: this.newImageText(),
-                             active: this.newIsActiveText(),
-                             owner: this.newOwnerText(),
-                             email: this.newEmailText()
-                         }));*/
-                debugger;
-
-                if ($("#createStoreForm").valid()) {
-                    alert('true');
-                } else {
-                    alert('false');
-                    $('#createStoreForm').showErrors();
-                }
-
-
-                //if (StoreViewModel.isValid()) {
-                //    if (StoreViewModel.errors().length == 0) {
-
-                //    } else {
-                //        alert('error');
-                //        StoreViewModel.errors.showAllMessages();
-                //    }
-                //}
-                /* $.ajax("/Admin/Knockout/CreateStore", {
-                    data: ko.toJSON({ model: self.store._latestValue[0] }),
-                    type: "post",
-                    contentType: "application/json",
-                    success: function (result) {
-                        $.pnotify({
-                            title: result,
-                            text: '',
-                            type: 'success',
-                        });
-                        $('#mywizard').wizard('next');
-                        $('#mywizard .steps li').each(function () {
-                            if ($(this).attr('class') == 'completed') {
-                                $(this).attr('data-target', '');
-                            }
-    
-                        });
-                    }
-                });*/
-            };
-
-            //};
-
-        };
-        ko.applyBindings(new StoreViewModel());
-    });
 </script>
