@@ -1,0 +1,69 @@
+﻿@model MyRentalPos.Areas.Admin.Models.Store.StoreModel
+
+<form id="createStoreForm">
+    @Html.ValidationSummary(false)
+    <div class="form-horizontal">
+        <div class="control-group">
+            @Html.LabelFor(model => model.StoreName, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.StoreName, new { required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Owner, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Owner, new { required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.EmailAddress, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.EmailAddress, new { type = "email", required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.BaseUrl, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.BaseUrl, new { required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.Image, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Image, new { required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+
+            <div class="controls">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.IsActive) Active?
+                </label>
+                <button type="button" id="createStoreButton" class="btn btn-primary">Create Store</button>
+            </div>
+            
+        </div>
+        
+    </div>
+</form>
+<script>
+    $('#createStoreForm').validate({
+        errorElement: "span"
+    });
+    $('#createStoreButton').click(function () {
+        if ($('#createStoreForm').valid()) {
+            var data = $('#createStoreForm').serialize();
+            var url = "/Admin/Store/CreateStoreJson";
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                success: function (data) {
+
+                }
+            });
+        } else {
+            alert('invalid');
+        }
+    });
+</script>

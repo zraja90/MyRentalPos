@@ -63,8 +63,12 @@ namespace MyRentalPos.Areas.Admin.Controllers
             };
             model.JsonModel = JsonConvert.SerializeObject(model);
             
-
             return View(model);
+        }
+        [HttpPost]
+        public JsonResult CreateStoreJson(StoreModel model)
+        {
+            return Json(new {success = ""});
         }
 
         [HttpPost]
