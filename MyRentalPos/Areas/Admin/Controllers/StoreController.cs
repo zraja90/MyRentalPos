@@ -28,9 +28,9 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var model = new AllStoresModel { Stores = _storeService.GetAll() };
+            //var model = new AllStoresModel { Stores = _storeService.GetAll() };
 
-            return View(model);
+            return View();
         }
 
 
@@ -54,10 +54,15 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Create()
         {
-            var model = new CreateStoreModel();
-            model.Store = new Store();
-            model.StoreAddress = new List<StoreAddress>();
+            var stores = _storeService.GetAll().ToList();
+            var model = new CreateStoreModel
+            {
+                StoreAddress = new List<StoreAddressModel>(),
+                Store = new StoreModel(),
+                Urls = stores.Select(x => x.BaseUrl),
+            };
             model.JsonModel = JsonConvert.SerializeObject(model);
+            
 
             return View(model);
         }

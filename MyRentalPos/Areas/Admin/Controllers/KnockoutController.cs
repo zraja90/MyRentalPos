@@ -26,8 +26,8 @@ namespace MyRentalPos.Areas.Admin.Controllers
         {
             var model = new CreateStoreModel
                             {
-                                StoreAddress = new List<StoreAddress>(),
-                                Store = new Store()
+                                StoreAddress = new List<StoreAddressModel>(),
+                                Store = new StoreModel()
                             };
             model.JsonModel = JsonConvert.SerializeObject(model);
             return View(model);

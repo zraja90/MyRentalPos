@@ -190,7 +190,8 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\KnockoutController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoreController.cs" />
-    <Compile Include="Areas\Admin\Models\Store\AllStoresModel.cs" />
+    <Compile Include="Areas\Admin\Models\Store\CreateStoreModel.cs" />
+    <Compile Include="Areas\Admin\Models\Store\StoreAddressModel.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadFilesController.cs" />
     <Compile Include="Areas\Admin\Models\Store\StoreModel.cs" />
