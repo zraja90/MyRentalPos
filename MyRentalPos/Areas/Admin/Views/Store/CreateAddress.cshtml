@@ -1,0 +1,69 @@
+﻿@model MyRentalPos.Areas.Admin.Models.Store.StoreAddressModel
+
+
+<form id="createStoreAddressForm">
+    @Html.ValidationSummary(false)
+    <div class="form-horizontal">
+        <div class="control-group">
+            @Html.LabelFor(model => model.Address, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.Address, new { required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.City, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.City, new { required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.State, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.State, new { type = "email", required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.ZipCode, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.ZipCode, new { required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.PhoneNumber, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.PhoneNumber, new { required = "" })
+            </div>
+        </div>
+        <div class="control-group">
+            @Html.LabelFor(model => model.FaxNumber, new { Class = "control-label" })
+            <div class="controls">
+                @Html.TextBoxFor(model => model.FaxNumber)
+                <div class="margin-top">
+                    <button class="btn btn-primary" id="createStoreAddressButton" type="button">Create Address</button>
+                    <button type="button" class="hide btnWizardNext">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $('#createStoreAddressForm').validate({
+        errorElement: "span"
+    });
+    $('#createStoreAddressButton').click(function () {
+        if ($('#createStoreAddressForm').valid()) {
+            var data = $('#createStoreAddressForm').serialize();
+            var url = "/Admin/Store/CreateStoreAddressJson";
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: data,
+                success: function (data) {
+
+                }
+            });
+        } else {
+            alert('invalid');
+        }
+    });
+</script>

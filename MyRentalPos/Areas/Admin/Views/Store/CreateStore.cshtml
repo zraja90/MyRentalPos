@@ -40,6 +40,7 @@
                     @Html.CheckBoxFor(model => model.IsActive) Active?
                 </label>
                 <button type="button" id="createStoreButton" class="btn btn-primary">Create Store</button>
+                <button type="button" id="storeNext" class="hide">Next</button>
             </div>
             
         </div>
@@ -59,7 +60,7 @@
                 url: url,
                 data: data,
                 success: function (data) {
-
+                    $('#createStoreButton').attr('disabled', 'disabled');
                 }
             });
         } else {

@@ -57,7 +57,7 @@ namespace MyRentalPos.Areas.Admin.Controllers
             var stores = _storeService.GetAll().ToList();
             var model = new CreateStoreModel
             {
-                StoreAddress = new List<StoreAddressModel>(),
+                StoreAddress = new StoreAddressModel(),
                 Store = new StoreModel(),
                 Urls = stores.Select(x => x.BaseUrl),
             };
