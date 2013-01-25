@@ -34,22 +34,27 @@
             </div>
         </div>
         <div class="control-group">
-
             <div class="controls">
                 <label class="checkbox">
                     @Html.CheckBoxFor(model => model.IsActive) Active?
                 </label>
                 <button type="button" id="createStoreButton" class="btn btn-primary">Create Store</button>
-                <button type="button" id="storeNext" class="hide">Next</button>
+                <button type="button" class="btnWizardNext">Next</button>
             </div>
-            
         </div>
-        
     </div>
 </form>
 <script>
     $('#createStoreForm').validate({
         errorElement: "span"
+    });
+    $('.btnWizardNext').click(function () {
+        //Next in Wizard
+        $('#myWizard').wizard('next');
+    });
+    $('.btnWizardPrevious').click(function () {
+        //Next in Wizard
+        $('#myWizard').wizard('previous');
     });
     $('#createStoreButton').click(function () {
         if ($('#createStoreForm').valid()) {

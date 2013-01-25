@@ -190,6 +190,8 @@
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\KnockoutController.cs" />
     <Compile Include="Areas\Admin\Controllers\StoreController.cs" />
+    <Compile Include="Areas\Admin\Models\Common\LeftMenuModel.cs" />
+    <Compile Include="Areas\Admin\Models\Store\AllStoresModel.cs" />
     <Compile Include="Areas\Admin\Models\Store\CreateStoreModel.cs" />
     <Compile Include="Areas\Admin\Models\Store\StoreAddressModel.cs" />
     <Compile Include="Controllers\StoreController.cs" />
@@ -496,7 +498,6 @@
     <Content Include="Areas\Admin\Views\Knockout\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Knockout\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Knockout\CreateStore.cshtml" />
-    <Content Include="Areas\Admin\Views\Knockout\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Knockout\CreateStoreAddress.cshtml" />
     <Content Include="Content\css\alignment.less" />
     <Content Include="Areas\Admin\Views\Store\CreateStore.cshtml" />

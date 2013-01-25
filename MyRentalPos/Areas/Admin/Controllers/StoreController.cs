@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MyRentalPos.Areas.Admin.Models.Common;
 using MyRentalPos.Areas.Admin.Models.Store;
 using MyRentalPos.Core;
 using MyRentalPos.Core.Domain.Employees;
@@ -28,9 +29,11 @@ namespace MyRentalPos.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            //var model = new AllStoresModel { Stores = _storeService.GetAll() };
+            var model = new AllStoresModel();
+            model.Stores = _storeService.GetAll().ToList();
 
-            return View();
+
+            return View(model);
         }
 
 
@@ -45,12 +48,7 @@ namespace MyRentalPos.Areas.Admin.Controllers
             };
             return PartialView(model);
         }
-        public class LeftMenuModel
-        {
-            public bool IsLoggedIn { get; set; }
-            public Employee Employee { get; set; }
-            public Store Store { get; set; }
-        }
+       
 
         public ActionResult Create()
         {
@@ -62,46 +60,15 @@ namespace MyRentalPos.Areas.Admin.Controllers
                 Urls = stores.Select(x => x.BaseUrl),
             };
             model.JsonModel = JsonConvert.SerializeObject(model);
-            
+
             return View(model);
         }
         [HttpPost]
         public JsonResult CreateStoreJson(StoreModel model)
         {
-            return Json(new {success = ""});
+            return Json(new { success = "" });
         }
 
-        [HttpPost]
-        public ActionResult Create(StoreModel model)
-        {
-            try
-            {
-                //var storeEntity = model;
-                //storeEntity.LogOutUrl = model.BaseUrl;
-                //_storeService.Add(storeEntity);
-                //var addressEntity = new StoreAddress
-                //                        {
-                //                            Address = model.Address,
-                //                            City = model.City,
-                //                            State = model.State,
-                //                            StoreId = storeEntity.Id,
-                //                            PhoneNumber = model.PhoneNumber,
-                //                            ZipCode = model.ZipCode,
-                //                            FaxNumber = model.FaxNumber,
-                //                            Country = model.Country
-                //                        };
-                ////storeEntity.StoreAddress = addressEntity;
-                //_storeService.Update(storeEntity);
-                this.SuccessNotification("Store was created.");
-
-                return RedirectToAction("Index");
-            }
-            catch (Exception ex)
-            {
-                this.ErrorNotification("There was an error in creating the store. Please try again.");
-                return View();
-            }
-        }
         public ActionResult Edit(int id)
         {
             var entity = _storeService.GetById(id);
@@ -121,11 +88,11 @@ namespace MyRentalPos.Areas.Admin.Controllers
                 //var entity = model.ToEntity();
 
                 //if (string.IsNullOrEmpty(entity.LogOutUrl))
-                  //  entity.LogOutUrl = model.BaseUrl;
-            //    _storeService.AddOrUpdate(entity);
+                //  entity.LogOutUrl = model.BaseUrl;
+                //    _storeService.AddOrUpdate(entity);
 
 
-              //  this.SuccessNotification(entity.StoreName + " has been updated");
+                //  this.SuccessNotification(entity.StoreName + " has been updated");
 
                 return RedirectToAction("Index");
             }
