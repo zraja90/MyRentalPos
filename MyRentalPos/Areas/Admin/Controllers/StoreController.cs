@@ -66,6 +66,9 @@ namespace MyRentalPos.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult CreateStoreJson(StoreModel model)
         {
+            model.LogOutUrl = model.BaseUrl;
+            var entity = model.ToEntity();
+            _storeService.Add(entity);
             return Json(new { success = "" });
         }
 

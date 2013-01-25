@@ -39,7 +39,7 @@
                     @Html.CheckBoxFor(model => model.IsActive) Active?
                 </label>
                 <button type="button" id="createStoreButton" class="btn btn-primary">Create Store</button>
-                <button type="button" class="btnWizardNext">Next</button>
+                <button type="button" id="step1Next" class="hide btn btn-primary btnWizardNext">Next</button>
             </div>
         </div>
     </div>
@@ -66,6 +66,8 @@
                 data: data,
                 success: function (data) {
                     $('#createStoreButton').attr('disabled', 'disabled');
+                    $('#myWizard').wizard('next');
+                    $('#step1Next').removeClass('hide');
                 }
             });
         } else {
