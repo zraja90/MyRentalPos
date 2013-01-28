@@ -60,7 +60,7 @@ namespace MyRentalPos.Areas.Admin.Controllers
                 Urls = stores.Select(x => x.BaseUrl),
             };
             model.JsonModel = JsonConvert.SerializeObject(model);
-
+//Create a cookie with store id in case refresh is hit. 
             return View(model);
         }
         [HttpPost]
