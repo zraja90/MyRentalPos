@@ -59,17 +59,32 @@ namespace MyRentalPos.Areas.Admin.Controllers
                 Store = new StoreModel(),
                 Urls = stores.Select(x => x.BaseUrl),
             };
-            model.JsonModel = JsonConvert.SerializeObject(model);
-//Create a cookie with store id in case refresh is hit. 
+            model.JsonModel = JsonConvert.SerializeObject(model);   
+            //Create a cookie with store id in case refresh is hit. 
             return View(model);
         }
         [HttpPost]
         public JsonResult CreateStoreJson(StoreModel model)
         {
-            model.LogOutUrl = model.BaseUrl;
-            var entity = model.ToEntity();
-            _storeService.Add(entity);
-            return Json(new { success = "" });
+            if (ModelState.IsValid)
+            {
+                model.LogOutUrl = model.BaseUrl;
+                var entity = model.ToEntity();
+                _storeService.Add(entity);
+                return Json(new {success = true,storeId = entity.Id});
+            }
+            return Json(new { success = false });
+        }
+        [HttpPost]
+        public JsonResult CreateStoreAddressJson(StoreAddressModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                var entity = model.ToEntity();
+                _storeService.AddAddress(entity);
+                return Json(new {success = true});
+            }
+            return Json(new { success = false });
         }
 
         public ActionResult Edit(int id)

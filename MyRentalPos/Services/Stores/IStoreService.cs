@@ -9,5 +9,6 @@ namespace MyRentalPos.Services.Stores
 {
     public interface IStoreService : ICrudService<Store>
     {
+        void AddAddress(StoreAddress entity);
     }
 }

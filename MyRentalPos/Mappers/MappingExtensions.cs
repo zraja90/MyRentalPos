@@ -20,5 +20,21 @@ namespace MyRentalPos.Mappers
         {
             return Mapper.Map(model, destination);
         }
+
+        public static StoreAddressModel ToModel(this StoreAddress entity)
+        {
+            return Mapper.Map<StoreAddress, StoreAddressModel>(entity);
+        }
+
+        public static StoreAddress ToEntity(this StoreAddressModel model)
+        {
+            return Mapper.Map<StoreAddressModel, StoreAddress>(model);
+        }
+
+        public static StoreAddress ToEntity(this StoreAddressModel model, StoreAddress destination)
+        {
+            return Mapper.Map(model, destination);
+        }
+
     }
 }

@@ -14,6 +14,9 @@ namespace MyRentalPos.Mappers
         {
             Mapper.CreateMap<Store, StoreModel>();
             Mapper.CreateMap<StoreModel, Store>();
+
+            Mapper.CreateMap<StoreAddress, StoreAddressModel>();
+            Mapper.CreateMap<StoreAddressModel, StoreAddress>();
         }
     }
 }

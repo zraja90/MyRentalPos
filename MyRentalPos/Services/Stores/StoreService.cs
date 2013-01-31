@@ -9,10 +9,16 @@ namespace MyRentalPos.Services.Stores
 {
     public class StoreService : CrudService<Store>, IStoreService
     {
-        private IRepository<StoreAddress> _storeAddressRepo ;
-        public StoreService(IRepository<Store> repo, IRepository<StoreAddress> storeAddressRepo) : base(repo)
+        private IRepository<StoreAddress> _storeAddressRepo;
+        public StoreService(IRepository<Store> repo, IRepository<StoreAddress> storeAddressRepo)
+            : base(repo)
         {
             _storeAddressRepo = storeAddressRepo;
+        }
+
+        public void AddAddress(StoreAddress entity)
+        {
+            _storeAddressRepo.Add(entity);
         }
     }
 }

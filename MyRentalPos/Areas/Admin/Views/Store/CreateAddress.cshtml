@@ -6,6 +6,8 @@
     <div class="form-horizontal">
         <div class="control-group">
             @Html.LabelFor(model => model.Address, new { Class = "control-label" })
+            @Html.HiddenFor(model=>model.StoreId,"")
+            
             <div class="controls">
                 @Html.TextBoxFor(model => model.Address, new { required = "" })
             </div>
@@ -19,7 +21,7 @@
         <div class="control-group">
             @Html.LabelFor(model => model.State, new { Class = "control-label" })
             <div class="controls">
-                @Html.TextBoxFor(model => model.State, new { type = "email", required = "" })
+                @Html.TextBoxFor(model => model.State, new {required = "" })
             </div>
         </div>
         <div class="control-group">
@@ -52,6 +54,7 @@
     });
     $('#createStoreAddressButton').click(function () {
         if ($('#createStoreAddressForm').valid()) {
+            debugger;
             var data = $('#createStoreAddressForm').serialize();
             var url = "/Admin/Store/CreateStoreAddressJson";
             $.ajax({
@@ -59,7 +62,7 @@
                 url: url,
                 data: data,
                 success: function (data) {
-
+                    
                 }
             });
         } else {
